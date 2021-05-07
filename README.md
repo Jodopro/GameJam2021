@@ -20,12 +20,12 @@ Obstacle
     Cloud (starts as gray, turns either white or dark grey (thunder), hint where the thunder will strike under the cloud by showing some kind of warning, random x coordinate)
     Bird
     Plane
-    AlienSpaceship
+    Alien
     Policebox?
-Enemy
+Enemy (all enemies are obstacles)
     Bird
     Plane
-    AlienSpaceship
+    Alien
     
 Attack
     SoundWave
