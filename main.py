@@ -1,5 +1,6 @@
 import pygame, sys, time, math, random
 from pygame.locals import *
+from model.Game import Game
 
 pygame.init()
 
@@ -14,7 +15,7 @@ YELLOW = (255, 255, 0)
 
 basicFont = pygame.font.SysFont(None, 48)
 
-window = pygame.display.set_mode((500, 500), 0, 32)
+window = pygame.display.set_mode((750, 1000), 0, 32)
 
 pygame.display.update()
 
@@ -31,6 +32,8 @@ def update_home(dt):
     homeLoc[1] += dy
     pygame.draw.rect(window, WHITE, (homeLoc[0], homeLoc[1], 25, 25))
 
+
+game = Game()
 
 pygame.display.update()
 while True:
