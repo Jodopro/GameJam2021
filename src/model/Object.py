@@ -6,5 +6,5 @@ class Object:
     def draw(self):
         pass
 
-    def update(self):
-        pass
+    def update(self, delta_t):
+        self.position += delta_t * self.speed
