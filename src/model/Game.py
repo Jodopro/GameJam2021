@@ -1,5 +1,5 @@
 import random, pygame
-from src.model.Ship import Ship
+from model.Ship import Ship
 
 
 class Game:

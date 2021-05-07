@@ -1,5 +1,5 @@
 import pygame
-from src.model.Object import Object
+from model.Object import Object
 
 
 class Ship(Object):
