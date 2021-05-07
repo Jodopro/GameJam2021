@@ -1,10 +1,10 @@
-set up virtual environment:
-`python3.6 -m virtualenv venv`
+set up virtual environment:\
+`python3.8 -m virtualenv venv`
 
 
-activate virtual environment:
-`. ./venv/bin/activate`
+activate virtual environment:\
+`. ./venv/bin/activate` or `.\venv\Scripts\active` for windows
 
 
-and subsequently install the requirements:
-`pip install requirements.txt`
+and subsequently install the requirements:\
+`pip install -r requirements.txt`
