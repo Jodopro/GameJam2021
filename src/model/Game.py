@@ -1,26 +1,29 @@
-import random
+import random, pygame
+from src.model.Ship import Ship
 
 
 class Game:
-    player_y = 10
-    player_x = 0
-    player_dx = 0
-    player_dy = 0
     stars = []
+    ship = None
+    HEIGHT = 10000
+    WIDTH = 750
+    WINDOW_HEIGHT = 1000
+    WINDOW_WIDTH = 750
 
     def __init__(self):
-        height = 1000
-        width = 750
+        self.ship = Ship(self)
         for i in range(1000):
-            x = random.randrange(width)
-            y = random.randrange(height)
-            self.stars.append((x, y))
+            x = random.randrange(self.WIDTH)
+            y = random.randrange(self.HEIGHT)
+            size = random.randrange(2, 6)
+            self.stars.append((x, y, size))
 
     def update(self, dt):
-        self.player_y += dt*self.player_dy
-        self.player_x += dt*self.player_dx
+        self.ship.update(dt)
 
-    def draw_window(self, window):
-        # window.
-        for (x, y) in self.stars:
-            temp_y = x-self.player_y
+    def draw(self, window):
+        window.fill((0, 0, 0))
+        for (x, y, size) in self.stars:
+            temp_y = y-self.ship.player_y
+            pygame.draw.circle(window, (255, 255, 255), (x, self.WINDOW_HEIGHT-temp_y), size)
+        self.ship.draw(window)

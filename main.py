@@ -1,6 +1,6 @@
 import pygame, sys, time, math, random
 from pygame.locals import *
-from model.Game import Game
+from src.model.Game import Game
 
 pygame.init()
 
@@ -24,17 +24,9 @@ homeSpeed = [0, 0]
 lastTime = time.time()
 
 
-def update_home(dt):
-    pygame.draw.rect(window, BLACK, (homeLoc[0], homeLoc[1], 25, 25))
-    dx = dt*homeSpeed[0]
-    dy = dt*homeSpeed[1]
-    homeLoc[0] += dx
-    homeLoc[1] += dy
-    pygame.draw.rect(window, WHITE, (homeLoc[0], homeLoc[1], 25, 25))
-
-
 game = Game()
-
+game.update(0)
+game.draw(window)
 pygame.display.update()
 while True:
     currentTime = time.time()
@@ -44,13 +36,23 @@ while True:
             sys.exit()
         elif event.type == KEYDOWN:
             if event.key == K_w:
-                homeSpeed[1] -= 5
+                game.ship.player_ddy += 100
             elif event.key == K_a:
-                homeSpeed[0] -= 5
+                game.ship.player_ddx -= 100
             elif event.key == K_s:
-                homeSpeed[1] += 5
+                game.ship.player_ddy -= 100
             elif event.key == K_d:
-                homeSpeed[0] += 5
-    update_home(currentTime-lastTime)
+                game.ship.player_ddx += 100
+        elif event.type == KEYUP:
+            if event.key == K_w:
+                game.ship.player_ddy -= 100
+            elif event.key == K_a:
+                game.ship.player_ddx += 100
+            elif event.key == K_s:
+                game.ship.player_ddy += 100
+            elif event.key == K_d:
+                game.ship.player_ddx -= 100
+    game.update(currentTime-lastTime)
+    game.draw(window)
     pygame.display.update()
     lastTime = currentTime
