@@ -1,5 +1,6 @@
 import random, pygame
 from model.Ship import Ship
+from view import View
 
 
 class Game:
@@ -7,10 +8,9 @@ class Game:
     ship = None
     HEIGHT = 10000
     WIDTH = 750
-    WINDOW_HEIGHT = 1000
-    WINDOW_WIDTH = 750
 
-    def __init__(self):
+    def __init__(self, window):
+        self.view = View(self, window)
         self.ship = Ship(self)
         for i in range(1000):
             x = random.randrange(self.WIDTH)
@@ -21,9 +21,8 @@ class Game:
     def update(self, dt):
         self.ship.update(dt)
 
-    def draw(self, window):
-        window.fill((0, 0, 0))
+    def draw(self):
+        self.view.window.fill((0, 0, 0))
         for (x, y, size) in self.stars:
-            temp_y = y-self.ship.player_y
-            pygame.draw.circle(window, (255, 255, 255), (x, self.WINDOW_HEIGHT-temp_y), size)
-        self.ship.draw(window)
+            self.view.draw_circle(x, y, (255, 255, 255), size)
+        self.ship.draw()

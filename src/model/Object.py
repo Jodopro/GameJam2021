@@ -1,4 +1,6 @@
 import numpy as np
+
+
 class Object:
     position = np.array([0.0,0.0])
     speed = np.array([0.0,0.0])

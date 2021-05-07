@@ -24,9 +24,9 @@ homeSpeed = [0, 0]
 lastTime = time.time()
 
 
-game = Game()
+game = Game(window)
 game.update(0)
-game.draw(window)
+game.draw()
 pygame.display.update()
 while True:
     currentTime = time.time()
@@ -36,23 +36,23 @@ while True:
             sys.exit()
         elif event.type == KEYDOWN:
             if event.key == K_w:
-                game.ship.player_ddy += 100
+                game.ship.ddy += 100
             elif event.key == K_a:
-                game.ship.player_ddx -= 100
+                game.ship.ddx -= 100
             elif event.key == K_s:
-                game.ship.player_ddy -= 100
+                game.ship.ddy -= 100
             elif event.key == K_d:
-                game.ship.player_ddx += 100
+                game.ship.ddx += 100
         elif event.type == KEYUP:
             if event.key == K_w:
-                game.ship.player_ddy -= 100
+                game.ship.ddy -= 100
             elif event.key == K_a:
-                game.ship.player_ddx += 100
+                game.ship.ddx += 100
             elif event.key == K_s:
-                game.ship.player_ddy += 100
+                game.ship.ddy += 100
             elif event.key == K_d:
-                game.ship.player_ddx -= 100
+                game.ship.ddx -= 100
     game.update(currentTime-lastTime)
-    game.draw(window)
+    game.draw()
     pygame.display.update()
     lastTime = currentTime
