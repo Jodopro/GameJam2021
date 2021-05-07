@@ -1,6 +1,10 @@
 import pygame
 from model.Object import Object
 
+dx_max = 600
+dy_max = 500
+dx_min = - dx_max
+dy_min = 50
 
 class Ship(Object):
     y = 100
@@ -16,14 +20,14 @@ class Ship(Object):
     def update(self, dt):
         self.dx += dt*self.ddx
         self.dy += dt*self.ddy
-        if self.dy > 500:
-            self.dy = 500
-        elif self.dy < 50:
-            self.dy = 50
-        if self.dx > 50:
-            self.dx = 50
-        elif self.dx < -50:
-            self.dx = -50
+        if self.dy > dx_max:
+            self.dy = dx_max
+        elif self.dy < dy_min:
+            self.dy = dy_min
+        if self.dx > dx_max:
+            self.dx = dx_max
+        elif self.dx < dx_min:
+            self.dx = dx_min
         self.y += dt * self.dy
         self.x += dt * self.dx
 

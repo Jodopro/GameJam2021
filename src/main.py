@@ -36,22 +36,22 @@ while True:
             sys.exit()
         elif event.type == KEYDOWN:
             if event.key == K_w:
-                game.ship.ddy += 100
+                game.ship.ddy += 1000
             elif event.key == K_a:
-                game.ship.ddx -= 100
+                game.ship.ddx -= 1000
             elif event.key == K_s:
-                game.ship.ddy -= 100
+                game.ship.ddy -= 1000
             elif event.key == K_d:
-                game.ship.ddx += 100
+                game.ship.ddx += 1000
         elif event.type == KEYUP:
             if event.key == K_w:
-                game.ship.ddy -= 100
+                game.ship.ddy -= 1000
             elif event.key == K_a:
-                game.ship.ddx += 100
+                game.ship.ddx += 1000
             elif event.key == K_s:
-                game.ship.ddy += 100
+                game.ship.ddy += 1000
             elif event.key == K_d:
-                game.ship.ddx -= 100
+                game.ship.ddx -= 1000
     game.update(currentTime-lastTime)
     game.draw()
     pygame.display.update()
