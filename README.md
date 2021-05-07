@@ -17,19 +17,19 @@ classes:
 Game (keeps track of all objects)
 Ship
 Obstacle
-    Clout (starts as gray, turns either white or dark grey (thunder), hint where the thunder will strike under the cloud by showing some kind of warning, random x coordinate)
-    Birb
+    Cloud (starts as gray, turns either white or dark grey (thunder), hint where the thunder will strike under the cloud by showing some kind of warning, random x coordinate)
+    Bird
     Plane
     AlienSpaceship
     Policebox?
 Enemy
-    Birb
+    Bird
     Plane
     AlienSpaceship
     
 Attack
     SoundWave
-    Blyksem
+    Bliksem
 
 Drawable & Updatable
     Ship
