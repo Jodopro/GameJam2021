@@ -1,6 +1,6 @@
 import pygame, sys, time, math, random
 from pygame.locals import *
-from src.model.Game import Game
+from model.Game import Game
 
 pygame.init()
 
