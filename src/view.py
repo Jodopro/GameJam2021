@@ -71,7 +71,7 @@ class View:
         rect = pygame.Rect(self.transform_x(x) - t_width // 2, self.transform_y(y), t_width, t_height)
         pygame.Surface.blit(self.window, image, rect)
 
-    def draw_backgournd(self):
+    def draw_background(self):
         offset = self.game.ship.pos[1] % 200
         y = offset - 200
         for i in range(11):

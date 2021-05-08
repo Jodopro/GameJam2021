@@ -35,9 +35,9 @@ def start_screen():
                 sys.exit()
             elif event.type == KEYUP:
                 exit_start_screen = True
-                break
     while True:
-        run_game()
+        current_pressed = pygame.key.get_pressed()
+        run_game(current_pressed)
 
 
 def end_screen():
@@ -55,14 +55,23 @@ def end_screen():
                 sys.exit()
             elif event.type == KEYUP:
                 exit_end_screen = True
-                break
 
 
-def run_game():
+def run_game(current_pressed):
     lastTime = time.time()
     game = Game(window)
     game.update(0)
     game.draw()
+    if current_pressed[K_w]:
+        game.ship.acc[1] += 1000
+    if current_pressed[K_a]:
+        game.ship.acc[0] -= 1000
+    if current_pressed[K_s]:
+        game.ship.acc[1] -= 1000
+    if current_pressed[K_d]:
+        game.ship.acc[0] += 1000
+    if current_pressed[K_SPACE]:
+        game.ship.shooting = True
     pygame.display.update()
     while True:
         currentTime = time.time()
