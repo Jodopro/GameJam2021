@@ -59,6 +59,9 @@ def end_screen():
 
 
 def run_game():
+    dt_sum = 0
+    dts = 0
+    
     lastTime = time.time()
     game = Game(window)
     game.update(0)
@@ -93,7 +96,9 @@ def run_game():
                 elif event.key == K_SPACE:
                     game.ship.shooting = False
         dt = currentTime - lastTime
-        print(dt)
+        dt_sum += dt
+        dts += 1
+        print(dt_sum/dts)
         game.update(dt)
         game.draw()
         pygame.display.update()

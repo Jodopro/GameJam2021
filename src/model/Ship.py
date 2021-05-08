@@ -4,8 +4,8 @@ from model.Object import Object
 from model.attack.Soundwave import Soundwave
 
 
-max_speed = np.array([600.0, 500.0])
-min_speed = np.array([-max_speed[0], 50.0])
+max_speed = np.array([300.0, 400.0])
+min_speed = np.array([-max_speed[0], 200.0])
 shooting_delay = 0.1
 house = pygame.image.load("view/house.png")
 

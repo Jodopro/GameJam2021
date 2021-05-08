@@ -1,7 +1,7 @@
 import pygame
 
 PLAYER_OFFSET = 100
-
+BACKGROUND_IMG = pygame.image.load("view/ugly_background.png")
 
 class View:
     def __init__(self, game, window):
@@ -63,6 +63,16 @@ class View:
             pygame.draw.polygon(self.window, color, new_posses)
 
     def draw_image(self, x, y, image, width, height, scale):
-        image = pygame.transform.scale(image, (width*scale, height*scale))
-        rect = pygame.Rect(self.transform_x(x), self.transform_y(y), width, height)
+        t_width = width*scale
+        t_height = height*scale
+        image = pygame.transform.scale(image, (t_width, t_height))
+        rect = pygame.Rect(self.transform_x(x)-t_width//2, self.transform_y(y), t_width, t_height)
         pygame.Surface.blit(self.window, image, rect)
+
+    def draw_backgournd(self):
+        offset = self.game.ship.pos[1] % 200
+        y = offset - 200
+        for i in range(11):
+            rect = pygame.Rect(0, y, 750, 200)
+            pygame.Surface.blit(self.window, BACKGROUND_IMG, rect)
+            y += 200
