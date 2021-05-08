@@ -7,13 +7,15 @@ from model.attack.Soundwave import Soundwave
 max_speed = np.array([600.0, 500.0])
 min_speed = np.array([-max_speed[0], 50.0])
 shooting_delay = 0.1
+house = pygame.image.load("view/house.png")
 
 
 class Ship(Object):
 
     def __init__(self, game):
         super().__init__(game)
-        self.ship_width = 30
+        self.ship_width = 25
+        self.ship_height = 35
         self.set_pos([375.0, 100.0])
         self.set_speed([0.0, min_speed[1]])
         self.acc = np.array([0,0])
@@ -55,4 +57,6 @@ class Ship(Object):
         self.update_shooting(dt)
 
     def draw(self):
-        self.game.view.draw_rect(self.pos[0], self.pos[1], (255, 0, 0), self.ship_width, self.ship_width)
+        scale = 3
+        self.game.view.draw_image(self.pos[0], self.pos[1]+(35*(scale-1)), house, self.ship_width, self.ship_height, scale)
+        # self.game.view.draw_rect(self.pos[0], self.pos[1], (255, 0, 0), self.ship_width, self.ship_width)
