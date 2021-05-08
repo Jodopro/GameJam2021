@@ -48,8 +48,8 @@ class Ship(Object):
         if self.pos[0] < 0 + self.ship_width//2:
             self.pos[0] = 0 + self.ship_width//2
             self.speed[0] = 0
-        elif self.pos[0] > self.game.WIDTH - self.ship_width//2:
-            self.pos[0] = self.game.WIDTH - self.ship_width//2
+        elif self.pos[0] > self.game.window_width - self.ship_width//2:
+            self.pos[0] = self.game.window_width - self.ship_width//2
             self.speed[0] = 0
 
     def update(self, dt):
