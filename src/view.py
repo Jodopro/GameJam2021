@@ -1,7 +1,7 @@
 import pygame
 
 PLAYER_OFFSET = 100
-BACKGROUND_IMG = pygame.image.load("view/ugly_background.png")
+BACKGROUND_IMG = pygame.image.load("view/ugly_background2.png")
 
 class View:
     def __init__(self, game, window):
