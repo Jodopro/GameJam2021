@@ -1,4 +1,4 @@
-from src.model.attack.Attack import Attack
+from model.attack.Attack import Attack
 
 wave_speed = 500
 width_expansion = 50

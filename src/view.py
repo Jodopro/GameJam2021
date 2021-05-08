@@ -16,10 +16,28 @@ class View:
     def transform_x(self, x):
         return x
 
-    def draw_circle(self, x, y, color, size):
-        pygame.draw.circle(self.window, color, (self.transform_x(x), self.transform_y(y)), size)
+    def draw_circle(self, x, y, color, radius):
+        """
+        draw a circle based on in-game coordinates
+        :param x: in-game x position of the center of the circle
+        :param y: in-game y position of the center of the circle
+        :param color: color of the circle
+        :param radius: radius of the circle
+        :return:
+        """
+        pygame.draw.circle(self.window, color, (self.transform_x(x), self.transform_y(y)), radius)
 
     def draw_rect(self, x, y, color, width, height, direction=[1, 0]):
+        """
+        draw a rectangle based on in-game coordinates
+        :param x: in-game x position of the center of the rectangle
+        :param y: in-game y position of the center of the rectangle
+        :param color: color of the rectangle expressed as an int three-tuple: (r, g, b)
+        :param width: width of the rectangle
+        :param height: height of the rectangle
+        :param direction: unit vector of the direction, [sin(angle), cos(angle)]
+        :return:
+        """
         if direction[0] == 1 and direction[1] == 0:
             pygame.draw.rect(self.window, color,
                              (self.transform_x(x) - width // 2, self.transform_y(y) - height // 2, width, height))

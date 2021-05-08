@@ -12,8 +12,7 @@ shooting_delay = 0.1
 class Ship(Object):
 
     def __init__(self, game):
-        super().__init__()
-        self.game = game
+        super().__init__(game)
         self.set_pos([375.0, 100.0])
         self.set_speed([0.0, min_speed[1]])
         self.acc = np.array([0,0])

@@ -1,5 +1,6 @@
 import random, pygame
 from model.Ship import Ship
+from model.obstacle.enemy.Plane import Plane
 from view import View
 
 
@@ -13,6 +14,7 @@ class Game:
         self.view = View(self, window)
         self.ship = Ship(self)
         self.objects = []
+        self.spawn_objects()
         self.finished = False
         for i in range(1000):
             x = random.randrange(self.WIDTH)
@@ -37,3 +39,9 @@ class Game:
 
     def add_object(self, o):
         self.objects.append(o)
+
+    def spawn_objects(self):
+        # spawn some objects for demo purposes,
+        plane = Plane(self)
+        plane.set_pos(self.ship.pos + [0, 500])
+        self.add_object(plane)
