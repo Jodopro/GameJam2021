@@ -15,7 +15,9 @@ YELLOW = (255, 255, 0)
 
 basicFont = pygame.font.SysFont(None, 48)
 
-window = pygame.display.set_mode((750, 1000), 0, 32)
+WINDOW_HEIGHT = 1000
+WINDOW_WIDTH = 750
+window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), 0, 32)
 
 
 def start_screen():

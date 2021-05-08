@@ -1,17 +1,18 @@
-import pygame, random
+import pygame
 
 PLAYER_OFFSET = 100
-WINDOW_HEIGHT = 1000
-WINDOW_WIDTH = 750
 
 
 class View:
     def __init__(self, game, window):
+        width, height = window.get_size()
+        self.window_width = width
+        self.window_height = height
         self.game = game
         self.window = window
 
     def transform_y(self, y):
-        return WINDOW_HEIGHT - PLAYER_OFFSET - (y - self.game.ship.pos[1])
+        return self.window_height - PLAYER_OFFSET - (y - self.game.ship.pos[1])
 
     def transform_x(self, x):
         return x

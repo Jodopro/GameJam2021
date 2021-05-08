@@ -4,16 +4,17 @@ from model.Ship import max_speed as ship_max_speed
 from model.Ship import min_speed as ship_min_speed
 from model.obstacle.enemy.Plane import Plane
 from view import View
-from view import WINDOW_HEIGHT
 
 from src.model.Object import Object
+from src.model.obstacle.enemy.Bird import Bird
+
+game_height = 10000
+spawning_delay = 1
 
 
 class Game:
     stars = []
     ship = None
-    HEIGHT = 10000
-    WIDTH = 750
 
     def __init__(self, window):
         self.view = View(self, window)
@@ -21,27 +22,40 @@ class Game:
         self.objects = []
         self.spawn_objects()
         self.finished = False
-        for i in range(1000):
-            x = random.randrange(self.WIDTH)
-            y = random.randrange(self.HEIGHT)
+        width, height = window.get_size()
+        self.window_width = width
+        self.window_height = height
+        self.spawning_counter = 0
+        for i in range(game_height):
+            width, height = window.get_size()
+            x = random.randrange(width)
+            y = random.randrange(game_height)
             size = random.randrange(2, 6)
             self.stars.append((x, y, size))
 
+    def update_spawner(self, dt):
+        self.spawning_counter += dt
+        if self.spawning_counter >= spawning_delay:
+            bird = Bird(self)
+            self.add_object(bird)
+            self.spawning_counter = 0
+
     def update(self, dt):
+        self.update_spawner(dt)
         self.ship.update(dt)
         garbage = []
         for o in self.objects:
             o.update(dt)
-            if (o.pos[0] < -0.5*self.WIDTH) or (o.pos[0] > 1.5*self.WIDTH):
+            if (o.pos[0] < -0.5*self.window_width) or (o.pos[0] > 1.5*self.window_width):
                 garbage.append(o)
-            elif (o.pos[1] < self.ship.pos[1] - (WINDOW_HEIGHT*0.5)) and (o.speed[1] < ship_min_speed[1]):
+            elif (o.pos[1] < self.ship.pos[1] - (self.window_height*0.5)) and (o.speed[1] < ship_min_speed[1]):
                 garbage.append(o)
-            elif (o.pos[1] > self.ship.pos[1] + (WINDOW_HEIGHT*1.5)) and (o.speed[1] > ship_max_speed[1]):
+            elif (o.pos[1] > self.ship.pos[1] + (self.window_height*1.5)) and (o.speed[1] > ship_max_speed[1]):
                 garbage.append(o)
         for o in garbage:
             self.objects.remove(o)
             del o
-        if self.ship.pos[1] > self.HEIGHT:
+        if self.ship.pos[1] > game_height:
             self.finished = True
 
     def draw(self):
