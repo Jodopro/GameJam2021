@@ -6,6 +6,10 @@ class Object:
     speed = np.array([0.0,0.0])
     acc = np.array([0.0,0.0])
 
+
+    def __init__(self,game):
+        self.game = game
+
     def set_pos(self, new_position):
         self.pos = np.array(new_position)
 
