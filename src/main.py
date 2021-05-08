@@ -111,4 +111,7 @@ def run_game(current_pressed):
     end_screen()
 
 
-start_screen()
+
+
+if __name__ == '__main__':
+    start_screen()

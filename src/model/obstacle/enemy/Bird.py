@@ -27,6 +27,7 @@ class Bird(Enemy):
 
     def draw(self):
         self.game.view.draw_image(self.pos[0], self.pos[1], space_bird, 35, 25, 1)
+        self.game.view.draw_hitbox(self.get_hitbox())
         # self.game.view.draw_circle(self.pos[0], self.pos[1], (0, 0, 255), 15)
 
     def update_shooting(self, dt):
