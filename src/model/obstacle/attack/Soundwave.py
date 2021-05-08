@@ -1,10 +1,11 @@
-from model.attack.Attack import Attack
+from model.obstacle.attack.Attack import Attack
 
 wave_speed = 500
 width_expansion = 50
 
 class Soundwave(Attack):
     def __init__(self, game, origin, speed, direction):
+        super().__init__(game)
         self.game = game
         self.pos = origin.copy()
         self.speed = speed.copy()

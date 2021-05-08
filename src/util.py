@@ -93,7 +93,6 @@ def detect_collision(p1, p2):
             # this means that we can find the max and min of both sets of scalars (a and b), and check if they are disjoint.
             ps_bounds = []
             for ps in projected_scalars:
-                # print(ps)
                 ps_bounds.append([min(ps), max(ps)])
             a, b = ps_bounds[0]
             c, d = ps_bounds[1]

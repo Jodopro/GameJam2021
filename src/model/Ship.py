@@ -1,7 +1,7 @@
 import numpy as np
 import pygame
 from model.Object import Object
-from model.attack.Soundwave import Soundwave
+from model.obstacle.attack.Soundwave import Soundwave
 
 
 max_speed = np.array([600.0, 500.0])
@@ -21,6 +21,13 @@ class Ship(Object):
         self.acc = np.array([0,0])
         self.shooting = False
         self.shooting_counter = shooting_delay
+
+    def get_hitbox(self):
+        a = self.pos + [-self.ship_width/2, self.ship_height/2]
+        b = self.pos + [self.ship_width/2, self.ship_height/2]
+        c = self.pos + [self.ship_width/2, -self.ship_height/2]
+        d = self.pos + [-self.ship_width/2, -self.ship_height/2]
+        return np.array([a,b,c,d])
 
     def update_speed(self, dt):
         super().update_speed(dt)
