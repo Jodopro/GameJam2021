@@ -1,7 +1,9 @@
 import pygame
+import numpy as np
 
 PLAYER_OFFSET = 100
 BACKGROUND_IMG = pygame.image.load("view/ugly_background.png")
+
 
 class View:
     def __init__(self, game, window):
@@ -45,8 +47,8 @@ class View:
         else:
             t_x = self.transform_x(x)
             t_y = self.transform_y(y)
-            w_2 = width//2
-            h_2 = height//2
+            w_2 = width // 2
+            h_2 = height // 2
             posses = [
                 (-w_2, -h_2),
                 (w_2, -h_2),
@@ -63,10 +65,10 @@ class View:
             pygame.draw.polygon(self.window, color, new_posses)
 
     def draw_image(self, x, y, image, width, height, scale):
-        t_width = width*scale
-        t_height = height*scale
+        t_width = width * scale
+        t_height = height * scale
         image = pygame.transform.scale(image, (t_width, t_height))
-        rect = pygame.Rect(self.transform_x(x)-t_width//2, self.transform_y(y), t_width, t_height)
+        rect = pygame.Rect(self.transform_x(x) - t_width // 2, self.transform_y(y), t_width, t_height)
         pygame.Surface.blit(self.window, image, rect)
 
     def draw_backgournd(self):
@@ -76,3 +78,11 @@ class View:
             rect = pygame.Rect(0, y, 750, 200)
             pygame.Surface.blit(self.window, BACKGROUND_IMG, rect)
             y += 200
+
+    def draw_hitbox(self, box):
+        edges = list(zip(box, np.append(box[1:], [box[0]], axis=0)))
+        for e in edges:
+            for pos in e:
+                pos[0] = self.transform_x(pos[0])
+                pos[1] = self.transform_y(pos[1])
+            pygame.draw.line(self.window, (255, 0, 0), e[0], e[1])

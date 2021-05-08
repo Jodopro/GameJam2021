@@ -66,4 +66,5 @@ class Ship(Object):
     def draw(self):
         scale = 3
         self.game.view.draw_image(self.pos[0], self.pos[1]+(35*(scale-1)), house, self.ship_width, self.ship_height, scale)
+        self.game.view.draw_hitbox(self.get_hitbox())
         # self.game.view.draw_rect(self.pos[0], self.pos[1], (255, 0, 0), self.ship_width, self.ship_width)

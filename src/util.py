@@ -1,4 +1,5 @@
 import numpy as np
+import math
 
 
 def perpendicular(v):
@@ -65,7 +66,7 @@ def find_edges(polygon):
     :return: edges in the form of [(start, end)] where start is the starting vertex, and end is the ending vertex
     """
     vertices = polygon
-    next_vertices = vertices[1:] + [vertices[0]]
+    next_vertices = np.append(vertices[1:], [vertices[0]], axis=0)
     edges = list(zip(vertices, next_vertices))
     return edges
 
@@ -100,6 +101,14 @@ def detect_collision(p1, p2):
                 return False
     return True
 
+
+def rotate_in_direction(v, dir):
+    rot_mat = np.dot(dir, np.array([[[0,1],[1,0]],[[-1,0],[0,1]]]))
+    return np.dot(rot_mat, v)
+
+def direction(angle):
+    a = angle/360*2*math.pi
+    return [math.sin(a), math.cos(a)]
 
 if __name__ == '__main__':
     square1 = np.array([[1, 3], [3, 3], [3, 1], [1, 1]])
