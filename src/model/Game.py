@@ -3,6 +3,8 @@ from model.Ship import Ship
 from model.obstacle.enemy.Plane import Plane
 from view import View
 
+from src.model.Object import Object
+
 
 class Game:
     stars = []
@@ -29,7 +31,8 @@ class Game:
     def draw(self):
         self.view.window.fill((0, 0, 0))
         for (x, y, size) in self.stars:
-            self.view.draw_circle(x, y, (255, 255, 255), size)
+            self.view.draw_image(x, y, Object.star, 25, 25)
+            # self.view.draw_circle(x, y, (255, 255, 255), size)
         self.ship.draw()
         for o in self.objects:
             o.draw()

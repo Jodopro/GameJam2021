@@ -60,3 +60,7 @@ class View:
                 y_new = p_x * sin_angle + p_y * cos_angle
                 new_posses.append((t_x + x_new, t_y + y_new))
             pygame.draw.polygon(self.window, color, new_posses)
+
+    def draw_image(self, x, y, image, width, height):
+        rect = pygame.Rect(x, y, width, height)
+        pygame.Surface.blit(self.window, image, rect)

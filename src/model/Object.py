@@ -1,4 +1,5 @@
 import numpy as np
+import pygame
 
 
 class Object:
@@ -6,6 +7,7 @@ class Object:
     speed = np.array([0.0,0.0])
     acc = np.array([0.0,0.0])
 
+    star = pygame.image.load("view/star.png")
 
     def __init__(self,game):
         self.game = game
