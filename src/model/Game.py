@@ -31,7 +31,7 @@ class Game:
     def draw(self):
         self.view.window.fill((0, 0, 0))
         for (x, y, size) in self.stars:
-            self.view.draw_image(x, y, Object.star, 25, 25)
+            self.view.draw_image(x, y, Object.stars[size-2], 25, 25, 1)
             # self.view.draw_circle(x, y, (255, 255, 255), size)
         self.ship.draw()
         for o in self.objects:

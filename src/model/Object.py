@@ -7,7 +7,14 @@ class Object:
     speed = np.array([0.0,0.0])
     acc = np.array([0.0,0.0])
 
-    star = pygame.image.load("view/star.png")
+    tiny_star = pygame.image.load("view/tiny_star.png")
+    small_star = pygame.image.load("view/small_star.png")
+    medium_star = pygame.image.load("view/medium_star.png")
+    large_star = pygame.image.load("view/large_star.png")
+    big_star = pygame.image.load("view/big_star.png")
+
+    stars = [tiny_star, small_star, medium_star, large_star, big_star]
+
 
     def __init__(self,game):
         self.game = game

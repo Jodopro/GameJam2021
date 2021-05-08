@@ -1,4 +1,4 @@
-import pygame
+import pygame, random
 
 PLAYER_OFFSET = 100
 WINDOW_HEIGHT = 1000
@@ -61,6 +61,7 @@ class View:
                 new_posses.append((t_x + x_new, t_y + y_new))
             pygame.draw.polygon(self.window, color, new_posses)
 
-    def draw_image(self, x, y, image, width, height):
-        rect = pygame.Rect(x, y, width, height)
+    def draw_image(self, x, y, image, width, height, scale):
+        image = pygame.transform.scale(image, (width*scale, height*scale))
+        rect = pygame.Rect(self.transform_x(x), self.transform_y(y), width, height)
         pygame.Surface.blit(self.window, image, rect)
