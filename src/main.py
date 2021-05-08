@@ -43,6 +43,8 @@ while True:
                 game.ship.acc[1] -= 1000
             elif event.key == K_d:
                 game.ship.acc[0] += 1000
+            elif event.key == K_SPACE:
+                game.ship.shooting = True
         elif event.type == KEYUP:
             if event.key == K_w:
                 game.ship.acc[1] -= 1000
@@ -52,6 +54,8 @@ while True:
                 game.ship.acc[1] += 1000
             elif event.key == K_d:
                 game.ship.acc[0] -= 1000
+            elif event.key == K_SPACE:
+                game.ship.shooting = False
     game.update(currentTime-lastTime)
     game.draw()
     pygame.display.update()

@@ -12,6 +12,7 @@ class Game:
     def __init__(self, window):
         self.view = View(self, window)
         self.ship = Ship(self)
+        self.objects = []
         for i in range(1000):
             x = random.randrange(self.WIDTH)
             y = random.randrange(self.HEIGHT)
@@ -20,9 +21,16 @@ class Game:
 
     def update(self, dt):
         self.ship.update(dt)
+        for o in self.objects:
+            o.update(dt)
 
     def draw(self):
         self.view.window.fill((0, 0, 0))
         for (x, y, size) in self.stars:
             self.view.draw_circle(x, y, (255, 255, 255), size)
         self.ship.draw()
+        for o in self.objects:
+            o.draw()
+
+    def add_object(self, o):
+        self.objects.append(o)
