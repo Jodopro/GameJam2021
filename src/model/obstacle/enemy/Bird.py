@@ -1,9 +1,7 @@
-import pygame
-
-from src.model.obstacle.enemy.Enemy import Enemy
-from src.model.attack.Soundwave import Soundwave
+from model.obstacle.enemy.Enemy import Enemy
+from model.obstacle.attack.Soundwave import Soundwave
 import random
-from src.view import PLAYER_OFFSET
+from view import PLAYER_OFFSET
 import numpy as np
 
 
@@ -13,14 +11,15 @@ space_bird = pygame.image.load("view/spaceship.png")
 
 class Bird(Enemy):
     def __init__(self, game):
+        super().__init__(game)
         self.game = game
         y = game.ship.pos[1] + game.window_height//2 - PLAYER_OFFSET + random.randrange(game.window_height//2)
         if random.random() > 0.5:
             x = 0
-            self.speed = np.array([250.0, 100.0])
+            self.speed = np.array([250.0, 80.0])
         else:
             x = game.window_width
-            self.speed = np.array([-250.0, 100.0])
+            self.speed = np.array([-250.0, 80.0])
         self.pos = np.array([x, y])
         self.shooting_counter = 0
 

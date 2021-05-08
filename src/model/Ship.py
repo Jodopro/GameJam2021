@@ -1,11 +1,11 @@
 import numpy as np
 import pygame
 from model.Object import Object
-from model.attack.Soundwave import Soundwave
+from model.obstacle.attack.Soundwave import Soundwave
 
 
-max_speed = np.array([600.0, 500.0])
-min_speed = np.array([-max_speed[0], 50.0])
+max_speed = np.array([300.0, 400.0])
+min_speed = np.array([-max_speed[0], 200.0])
 shooting_delay = 0.1
 house = pygame.image.load("view/house.png")
 
@@ -21,6 +21,13 @@ class Ship(Object):
         self.acc = np.array([0,0])
         self.shooting = False
         self.shooting_counter = shooting_delay
+
+    def get_hitbox(self):
+        a = self.pos + [-self.ship_width/2, self.ship_height/2]
+        b = self.pos + [self.ship_width/2, self.ship_height/2]
+        c = self.pos + [self.ship_width/2, -self.ship_height/2]
+        d = self.pos + [-self.ship_width/2, -self.ship_height/2]
+        return np.array([a,b,c,d])
 
     def update_speed(self, dt):
         super().update_speed(dt)

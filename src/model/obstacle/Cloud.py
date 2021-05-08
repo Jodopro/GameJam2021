@@ -1,6 +1,6 @@
 import enum
 
-from src.model.obstacle.Obstacle import Obstacle
+from model.obstacle.Obstacle import Obstacle
 
 
 class Cloud(Obstacle):
