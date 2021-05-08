@@ -11,7 +11,7 @@ class View:
         self.window = window
 
     def transform_y(self, y):
-        return WINDOW_HEIGHT - PLAYER_OFFSET - (y - self.game.ship.y)
+        return WINDOW_HEIGHT - PLAYER_OFFSET - (y - self.game.ship.pos[1])
 
     def transform_x(self, x):
         return x

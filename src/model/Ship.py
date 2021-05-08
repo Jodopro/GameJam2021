@@ -1,35 +1,33 @@
+import numpy as np
 import pygame
 from model.Object import Object
 
-dx_max = 600
-dy_max = 500
-dx_min = - dx_max
-dy_min = 50
+
+max_speed = np.array([600.0, 500.0])
+min_speed = np.array([-max_speed[0], 50.0])
+
 
 class Ship(Object):
-    y = 100
-    x = 375
-    dx = 0
-    dy = 25
-    ddx = 0
-    ddy = 0
 
     def __init__(self, game):
+        super().__init__()
         self.game = game
+        self.set_pos([375.0, 100.0])
+        self.set_speed([0.0, min_speed[1]])
+        self.acc = np.array([0,0])
+
+    def set_acc(self, new_acc):
+        self.acc = np.array(new_acc)
+
 
     def update(self, dt):
-        self.dx += dt*self.ddx
-        self.dy += dt*self.ddy
-        if self.dy > dx_max:
-            self.dy = dx_max
-        elif self.dy < dy_min:
-            self.dy = dy_min
-        if self.dx > dx_max:
-            self.dx = dx_max
-        elif self.dx < dx_min:
-            self.dx = dx_min
-        self.y += dt * self.dy
-        self.x += dt * self.dx
+        self.speed += dt * self.acc
+        for i in range(len(self.speed)):
+            if self.speed[i] > max_speed[i]:
+                self.speed[i] = max_speed[i]
+            if self.speed[i] < min_speed[i]:
+                self.speed[i] = min_speed[i]
+        self.pos += dt * self.speed
 
     def draw(self):
-        self.game.view.draw_rect(self.x, self.y, (255, 0, 0), 25, 25)
+        self.game.view.draw_rect(self.pos[0], self.pos[1], (255, 0, 0), 25, 25)
