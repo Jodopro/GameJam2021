@@ -15,14 +15,14 @@ class Ship(Object):
         self.set_pos([375.0, 100.0])
         self.set_speed([0.0, min_speed[1]])
 
-    def update(self, dt):
-        self.speed += dt * self.acc
+
+    def update_speed(self, dt):
+        super().update_speed(dt)
         for i in range(len(self.speed)):
             if self.speed[i] > max_speed[i]:
                 self.speed[i] = max_speed[i]
             if self.speed[i] < min_speed[i]:
                 self.speed[i] = min_speed[i]
-        super().update(dt)
 
     def draw(self):
         self.game.view.draw_rect(self.pos[0], self.pos[1], (255, 0, 0), 25, 25)

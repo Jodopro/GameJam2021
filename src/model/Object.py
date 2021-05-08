@@ -18,5 +18,12 @@ class Object:
     def draw(self):
         pass
 
-    def update(self, dt):
+    def update_speed(self, dt):
+        self.speed += dt * self.acc
+
+    def update_pos(self, dt):
         self.pos += dt * self.speed
+
+    def update(self, dt):
+        self.update_speed(dt)
+        self.update_pos(dt)
