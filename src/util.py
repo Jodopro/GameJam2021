@@ -40,8 +40,8 @@ def project_all(points, b):
 def find_edges(polygon):
     """
     return edges of the polygon
-    :param polygon: the polygon for which edges will be found. polygon must be a set of vertices
-    :return: edges in the form of [(start, end)] where start is the start coordinates of the edge, and end is the end coordinates of the edge.
+    :param polygon: the polygon for which edges will be found, as a list of vertices
+    :return: edges in the form of [(start, end)] where start is the starting vertex, and end is the ending vertex
     """
     vertices = polygon
     next_vertices = vertices[1:] + [vertices[0]]
@@ -51,10 +51,11 @@ def find_edges(polygon):
 def detect_collision(a,b):
     """
     detect collision between convex polygons a and b, based on the separating axes theorem
-    :param a: a convex polygon
-    :param b: a convex polygon
+    :param a: a convex polygon, as a list of vertices
+    :param b: a convex polygon, as a list of vertices
     :return: if the polygons overlap
     """
     edges = []
     edges.append(find_edges(a))
     edges.append(find_edges(b))
+
