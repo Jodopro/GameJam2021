@@ -90,7 +90,9 @@ def run_game():
                     game.ship.acc[0] -= 1000
                 elif event.key == K_SPACE:
                     game.ship.shooting = False
-        game.update(currentTime - lastTime)
+        dt = currentTime - lastTime
+        print(dt)
+        game.update(dt)
         game.draw()
         pygame.display.update()
         lastTime = currentTime
