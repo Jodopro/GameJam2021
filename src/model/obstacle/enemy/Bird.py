@@ -1,6 +1,6 @@
 from model.obstacle.enemy.Enemy import Enemy
 from model.obstacle.attack.Soundwave import Soundwave
-import random
+import random, pygame
 from view import PLAYER_OFFSET
 import numpy as np
 

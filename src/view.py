@@ -76,3 +76,4 @@ class View:
             rect = pygame.Rect(0, y, 750, 200)
             pygame.Surface.blit(self.window, BACKGROUND_IMG, rect)
             y += 200
+
