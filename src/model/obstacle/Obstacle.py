@@ -5,7 +5,7 @@ import util
 
 class Obstacle(Object):
 
-    def __init__(self, game, color=(255,255, 255), width=100, height=100, direction=[0.0,0.1]):
+    def __init__(self, game, color=(255,255, 255), width=100, height=100, direction=[0.0,1.0]):
         super().__init__(game)
         self.color = color
         self.width = width
