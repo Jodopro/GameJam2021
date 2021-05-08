@@ -14,12 +14,14 @@ class Bird(Enemy):
         super().__init__(game)
         self.game = game
         y = game.ship.pos[1] + game.window_height//2 - PLAYER_OFFSET + random.randrange(game.window_height//2)
+        v_speed = random.randrange(50, 100)
         if random.random() > 0.5:
             x = 0
-            self.speed = np.array([250.0, 80.0])
+            self.speed = np.array([250.0, v_speed])
         else:
             x = game.window_width
-            self.speed = np.array([-250.0, 80.0])
+            self.speed = np.array([-250.0, v_speed])
+        self.aim_offset = random.randrange(-200, 200)
         self.pos = np.array([x, y])
         self.shooting_counter = 0
 
@@ -31,7 +33,7 @@ class Bird(Enemy):
         self.shooting_counter += dt
         if self.shooting_counter >= shooting_delay:
             rel_x = self.game.ship.pos[0]-self.pos[0]
-            rel_y = self.game.ship.pos[1]-self.pos[1]
+            rel_y = self.game.ship.pos[1]-self.pos[1]+self.aim_offset
             if (rel_x > 0 and self.speed[0] > 0) or (rel_x < 0 and self.speed[0] < 0):
                 direction = np.array([rel_x, rel_y])
                 new_wave = Soundwave(self.game, self.pos, self.speed, direction)

@@ -58,10 +58,9 @@ class Game:
         if self.ship.pos[1] > game_height:
             self.finished = True
 
-
     def draw(self):
         self.view.window.fill((0, 0, 0))
-        self.view.draw_backgournd()
+        self.view.draw_background()
         self.ship.draw()
         for o in self.objects:
             o.draw()
