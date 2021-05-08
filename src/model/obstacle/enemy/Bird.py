@@ -1,7 +1,7 @@
 from model.obstacle.enemy.Enemy import Enemy
-from model.attack.Soundwave import Soundwave
+from model.obstacle.attack.Soundwave import Soundwave
 import random
-from src.view import PLAYER_OFFSET
+from view import PLAYER_OFFSET
 import numpy as np
 
 
@@ -10,6 +10,7 @@ shooting_delay = 0.1
 
 class Bird(Enemy):
     def __init__(self, game):
+        super().__init__(game)
         self.game = game
         y = game.ship.pos[1] + game.window_height//2 - PLAYER_OFFSET + random.randrange(game.window_height//2)
         if random.random() > 0.5:

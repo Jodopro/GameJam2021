@@ -1,4 +1,4 @@
-from src.model.obstacle.enemy.Enemy import Enemy
+from model.obstacle.enemy.Enemy import Enemy
 
 class Alien(Enemy):
     pass

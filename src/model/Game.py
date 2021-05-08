@@ -1,7 +1,10 @@
 import random
+
+import util
 from model.Ship import Ship
 from model.Ship import max_speed as ship_max_speed
 from model.Ship import min_speed as ship_min_speed
+from model.obstacle.Obstacle import Obstacle
 from model.obstacle.enemy.Plane import Plane
 from view import View
 
@@ -39,6 +42,9 @@ class Game:
         garbage = []
         for o in self.objects:
             o.update(dt)
+            if isinstance(o, Obstacle):
+                if self.collision(o):
+                    o.color = (255,0,0)
             if (o.pos[0] < -0.1*self.window_width) or (o.pos[0] > 1.1*self.window_width):
                 garbage.append(o)
             elif (o.pos[1] < self.ship.pos[1] - (self.window_height*0.1)) and (o.speed[1] < ship_min_speed[1]):
@@ -48,8 +54,10 @@ class Game:
         for o in garbage:
             self.objects.remove(o)
             del o
+
         if self.ship.pos[1] > game_height:
             self.finished = True
+
 
     def draw(self):
         self.view.window.fill((0, 0, 0))
@@ -66,3 +74,6 @@ class Game:
         plane = Plane(self)
         plane.set_pos(self.ship.pos + [0, 500])
         self.add_object(plane)
+
+    def collision(self, obstacle):
+        return util.detect_collision(self.ship.get_hitbox(), obstacle.get_hitbox())
