@@ -13,6 +13,7 @@ class Ship(Object):
 
     def __init__(self, game):
         super().__init__(game)
+        self.ship_width = 30
         self.set_pos([375.0, 100.0])
         self.set_speed([0.0, min_speed[1]])
         self.acc = np.array([0,0])
@@ -40,9 +41,18 @@ class Ship(Object):
                 self.game.add_object(new_wave)
                 self.shooting_counter = 0
 
+    def update_pos(self, dt):
+        self.pos += dt * self.speed
+        if self.pos[0] < 0 + self.ship_width//2:
+            self.pos[0] = 0 + self.ship_width//2
+            self.speed[0] = 0
+        elif self.pos[0] > self.game.WIDTH - self.ship_width//2:
+            self.pos[0] = self.game.WIDTH - self.ship_width//2
+            self.speed[0] = 0
+
     def update(self, dt):
         super().update(dt)
         self.update_shooting(dt)
 
     def draw(self):
-        self.game.view.draw_rect(self.pos[0], self.pos[1], (255, 0, 0), 25, 25)
+        self.game.view.draw_rect(self.pos[0], self.pos[1], (255, 0, 0), self.ship_width, self.ship_width)
