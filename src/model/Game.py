@@ -42,21 +42,25 @@ class Game:
         garbage = []
         for o in self.objects:
             o.update(dt)
-            if isinstance(o, Obstacle):
-                if self.collision(o):
-                    o.color = (255,0,0)
             if (o.pos[0] < -0.1*self.window_width) or (o.pos[0] > 1.1*self.window_width):
                 garbage.append(o)
             elif (o.pos[1] < self.ship.pos[1] - (self.window_height*0.1)) and (o.speed[1] < ship_min_speed[1]):
                 garbage.append(o)
             elif (o.pos[1] > self.ship.pos[1] + (self.window_height*1.1)) and (o.speed[1] > ship_max_speed[1]):
                 garbage.append(o)
+        self.check_collisions()
         for o in garbage:
             self.objects.remove(o)
             del o
 
         if self.ship.pos[1] > game_height:
             self.finished = True
+
+    def check_collisions(self):
+        for o in self.objects:
+            if isinstance(o, Obstacle):
+                if self.collision(o):
+                    o.color = (255,0,0)
 
     def draw(self):
         self.view.window.fill((0, 0, 0))

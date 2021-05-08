@@ -1,4 +1,5 @@
 import pygame
+import numpy as np
 
 from model.obstacle.attack.Attack import Attack
 
@@ -12,8 +13,7 @@ class Soundwave(Attack):
         self.game = game
         self.pos = origin.copy()
         self.speed = speed.copy()
-        factor = (1/(direction[0]**2 + direction[1]**2))**0.5
-        self.direction = factor*direction
+        self.direction = direction/np.linalg.norm(direction)
         self.speed += self.direction*wave_speed
         self.width = 10
         self.height = 10
