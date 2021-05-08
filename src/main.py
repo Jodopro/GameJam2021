@@ -17,46 +17,86 @@ basicFont = pygame.font.SysFont(None, 48)
 
 window = pygame.display.set_mode((750, 1000), 0, 32)
 
-pygame.display.update()
 
-homeLoc = [250, 500]
-homeSpeed = [0, 0]
-lastTime = time.time()
+def start_screen():
+    window.fill((0, 0, 0))
+    line1 = basicFont.render("Bananas are Berries", False, (255, 255, 255))
+    window.blit(line1, (330, 10))
+    line2 = basicFont.render("Press any key to start", False, (255, 255, 255))
+    window.blit(line2, (330, 100))
+    pygame.display.update()
+    exit_start_screen = False
+    while not exit_start_screen:
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == KEYUP:
+                exit_start_screen = True
+                break
+    while True:
+        run_game()
 
 
-game = Game(window)
-game.update(0)
-game.draw()
-pygame.display.update()
-while True:
-    currentTime = time.time()
-    for event in pygame.event.get():
-        if event.type == QUIT:
-            pygame.quit()
-            sys.exit()
-        elif event.type == KEYDOWN:
-            if event.key == K_w:
-                game.ship.acc[1] += 1000
-            elif event.key == K_a:
-                game.ship.acc[0] -= 1000
-            elif event.key == K_s:
-                game.ship.acc[1] -= 1000
-            elif event.key == K_d:
-                game.ship.acc[0] += 1000
-            elif event.key == K_SPACE:
-                game.ship.shooting = True
-        elif event.type == KEYUP:
-            if event.key == K_w:
-                game.ship.acc[1] -= 1000
-            elif event.key == K_a:
-                game.ship.acc[0] += 1000
-            elif event.key == K_s:
-                game.ship.acc[1] += 1000
-            elif event.key == K_d:
-                game.ship.acc[0] -= 1000
-            elif event.key == K_SPACE:
-                game.ship.shooting = False
-    game.update(currentTime-lastTime)
+def end_screen():
+    window.fill((0, 0, 0))
+    line1 = basicFont.render("Bananas are Berries", False, (255, 255, 255))
+    window.blit(line1, (330, 10))
+    line2 = basicFont.render("Press any key to try again", False, (255, 255, 255))
+    window.blit(line2, (330, 100))
+    pygame.display.update()
+    exit_end_screen = False
+    while not exit_end_screen:
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == KEYUP:
+                exit_end_screen = True
+                break
+
+
+def run_game():
+    lastTime = time.time()
+    game = Game(window)
+    game.update(0)
     game.draw()
     pygame.display.update()
-    lastTime = currentTime
+    while True:
+        currentTime = time.time()
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == KEYDOWN:
+                if event.key == K_w:
+                    game.ship.acc[1] += 1000
+                elif event.key == K_a:
+                    game.ship.acc[0] -= 1000
+                elif event.key == K_s:
+                    game.ship.acc[1] -= 1000
+                elif event.key == K_d:
+                    game.ship.acc[0] += 1000
+                elif event.key == K_SPACE:
+                    game.ship.shooting = True
+            elif event.type == KEYUP:
+                if event.key == K_w:
+                    game.ship.acc[1] -= 1000
+                elif event.key == K_a:
+                    game.ship.acc[0] += 1000
+                elif event.key == K_s:
+                    game.ship.acc[1] += 1000
+                elif event.key == K_d:
+                    game.ship.acc[0] -= 1000
+                elif event.key == K_SPACE:
+                    game.ship.shooting = False
+        game.update(currentTime - lastTime)
+        game.draw()
+        pygame.display.update()
+        lastTime = currentTime
+        if game.finished:
+            break
+    end_screen()
+
+
+start_screen()

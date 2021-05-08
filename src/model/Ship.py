@@ -20,7 +20,6 @@ class Ship(Object):
         self.shooting = False
         self.shooting_counter = shooting_delay
 
-
     def update_speed(self, dt):
         super().update_speed(dt)
         for i in range(len(self.speed)):
@@ -29,6 +28,7 @@ class Ship(Object):
             if self.speed[i] < min_speed[i]:
                 self.speed[i] = min_speed[i]
 
+    def update_shooting(self, dt):
         self.shooting_counter += dt
         if self.shooting_counter >= shooting_delay:
             self.shooting_counter = shooting_delay
@@ -40,6 +40,10 @@ class Ship(Object):
                 new_wave = Soundwave(self.game, self.pos, self.speed, direction)
                 self.game.add_object(new_wave)
                 self.shooting_counter = 0
+
+    def update(self, dt):
+        super().update(dt)
+        self.update_shooting(dt)
 
     def draw(self):
         self.game.view.draw_rect(self.pos[0], self.pos[1], (255, 0, 0), 25, 25)

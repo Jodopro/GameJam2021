@@ -13,6 +13,7 @@ class Game:
         self.view = View(self, window)
         self.ship = Ship(self)
         self.objects = []
+        self.finished = False
         for i in range(1000):
             x = random.randrange(self.WIDTH)
             y = random.randrange(self.HEIGHT)
@@ -23,6 +24,8 @@ class Game:
         self.ship.update(dt)
         for o in self.objects:
             o.update(dt)
+        if self.ship.pos[1] > self.HEIGHT:
+            self.finished = True
 
     def draw(self):
         self.view.window.fill((0, 0, 0))
