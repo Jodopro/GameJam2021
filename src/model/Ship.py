@@ -20,9 +20,6 @@ class Ship(Object):
         self.shooting = False
         self.shooting_counter = 0
 
-    def set_acc(self, new_acc):
-        self.acc = np.array(new_acc)
-
     def update(self, dt):
         self.speed += dt * self.acc
         for i in range(len(self.speed)):
@@ -30,7 +27,7 @@ class Ship(Object):
                 self.speed[i] = max_speed[i]
             if self.speed[i] < min_speed[i]:
                 self.speed[i] = min_speed[i]
-        self.pos += dt * self.speed
+        super().update(dt)
 
         self.shooting_counter += dt
         if self.shooting_counter >= shooting_delay:
