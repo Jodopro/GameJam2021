@@ -1,3 +1,5 @@
+import pygame
+
 from src.model.obstacle.enemy.Enemy import Enemy
 from src.model.attack.Soundwave import Soundwave
 import random
@@ -6,6 +8,7 @@ import numpy as np
 
 
 shooting_delay = 0.1
+space_bird = pygame.image.load("view/spaceship.png")
 
 
 class Bird(Enemy):
@@ -22,7 +25,8 @@ class Bird(Enemy):
         self.shooting_counter = 0
 
     def draw(self):
-        self.game.view.draw_circle(self.pos[0], self.pos[1], (0, 0, 255), 15)
+        self.game.view.draw_image(self.pos[0], self.pos[1], space_bird, 35, 25, 1)
+        # self.game.view.draw_circle(self.pos[0], self.pos[1], (0, 0, 255), 15)
 
     def update_shooting(self, dt):
         self.shooting_counter += dt

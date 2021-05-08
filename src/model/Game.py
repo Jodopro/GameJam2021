@@ -61,7 +61,8 @@ class Game:
     def draw(self):
         self.view.window.fill((0, 0, 0))
         for (x, y, size) in self.stars:
-            self.view.draw_image(x, y, Object.stars[size-2], 25, 25, 1)
+            if self.window_height > y > 0:
+                self.view.draw_image(x, y, Object.stars[size-2], 25, 25, 1)
         self.ship.draw()
         for o in self.objects:
             o.draw()
