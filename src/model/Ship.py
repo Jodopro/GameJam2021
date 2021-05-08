@@ -18,7 +18,7 @@ class Ship(Object):
         self.set_speed([0.0, min_speed[1]])
         self.acc = np.array([0,0])
         self.shooting = False
-        self.shooting_counter = 0
+        self.shooting_counter = shooting_delay
 
 
     def update_speed(self, dt):
