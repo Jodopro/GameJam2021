@@ -4,13 +4,11 @@ from model.obstacle.Balloon import Balloon
 from model.obstacle.Ship import Ship
 from model.obstacle.Obstacle import Obstacle
 from model.obstacle.enemy.Plane import Plane
+from model.obstacle.attack.Soundwave import Soundwave
 from model.Battery import Battery
 from view import View
 
 from model.obstacle.enemy.Bird import Bird
-
-# not in config because where going to not need it when the game is infinite
-game_height = 5000
 
 
 class Game:
@@ -60,10 +58,6 @@ class Game:
             self.remove_object(o)
             del o
 
-        if self.ship.pos[1] > game_height:
-            self.score = time.time() - self.start_time
-            self.finished = True
-
     def check_collisions(self):
         colliding_indices = util.detect_collision_pairs(list(map(lambda o: o.get_hitbox(), self.friendly_obstacles)),
                                                       list(map(lambda o: o.get_hitbox(),
@@ -82,9 +76,18 @@ class Game:
             f_o = self.friendly_obstacles[i]
             h_o = self.hostile_obstacles[j]
             colliding_pairs.append((f_o, h_o))
-        for c_p in colliding_pairs:
-            for o in c_p:
-                o.color = (255, 0, 0)
+        for (friendly, enemy) in colliding_pairs:
+            if isinstance(friendly, Balloon):
+                self.score = time.time() - self.start_time
+                self.finished = True
+            elif isinstance(friendly, Soundwave):
+                self.remove_object(friendly)
+                del friendly
+            if isinstance(enemy, Soundwave):
+                self.remove_object(enemy)
+                del enemy
+            # for o in c_p:
+            #     o.color = (255, 0, 0)
                 # if not isinstance(o, Ship) and not isinstance(o, Balloon):
                 #     self.remove_object(o)
     # print(f'colliding pairs: {colliding_pairs}')
