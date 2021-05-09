@@ -45,7 +45,7 @@ class Game:
         if self.spawning_counter >= self.enemy_spawning_delay:
             self.enemy_spawning_delay *= BIRD_SPAWNING_DELAY_DECREASE
             self.difficulty += DIFFICULTY_INCREASE
-            modifier = 100 + 10*self.difficulty + self.difficulty**2 + self.difficulty**2//10
+            modifier = 100 + 10*self.difficulty + self.difficulty**2 + self.difficulty**2*10
             r = random.random()*modifier
             if r < 100:
                 o = ConstantBird(self)

@@ -9,7 +9,7 @@ import numpy as np
 
 from config import *
 
-bliksem_delay = 2.0
+bliksem_delay = 0.7
 
 class Cloud(Obstacle):
     class Type(enum.Enum):
@@ -19,7 +19,7 @@ class Cloud(Obstacle):
 
     type = Type(2) # default type
 
-    def __init__(self, *args, game, delay=2.0, **kwargs):
+    def __init__(self, *args, game, delay=0.5, **kwargs):
         super().__init__(*args, game=game, **kwargs)
         temp_y = int((1 - BIRD_SPAWN_PLACE) * WINDOW_HEIGHT) + random.randrange(int(WINDOW_HEIGHT * BIRD_SPAWN_PLACE))
         y = game.ship.pos[1] - PLAYER_OFFSET + temp_y
@@ -27,10 +27,16 @@ class Cloud(Obstacle):
         self.pos = np.array([x, y])
         self.delay = delay
         self.time_elapsed = 0.0
+        self.bliksem = False
 
 
     def draw(self):
-        self.game.view.draw_image(self.pos[0], self.pos[0], CLOUD_WHITE, self.width, self.height)
+        if self.type == Cloud.Type.White:
+            self.game.view.draw_image(self.pos[0], self.pos[1], CLOUD_WHITE, self.width, self.height)
+        if self.type == Cloud.Type.Grey:
+            self.game.view.draw_image(self.pos[0], self.pos[1], CLOUD_GREY, self.width, self.height)
+        if self.type == Cloud.Type.Black:
+            self.game.view.draw_image(self.pos[0], self.pos[1], CLOUD_BLACK, self.width, self.height)
 
 
     def update(self, d_t):
@@ -41,12 +47,17 @@ class Cloud(Obstacle):
                 self.change_type()
         if self.type == Cloud.Type.Black:
             if self.time_elapsed >= bliksem_delay:
-                self.make_bliksem()
+                if not self.bliksem:
+                    self.make_bliksem()
+                    self.bliksem = True
+                # self.game.remove_object(self)
 
     def change_type(self):
         self.type = random.choice([Cloud.Type.White, Cloud.Type.Black])
         if self.type == Cloud.Type.Black:
+            self.game.remove_object(self)
             self.nature = Obstacle.Nature.Hostile
+            self.game.add_object(self)
             self.time_elapsed = 0.0
 
     def make_bliksem(self):

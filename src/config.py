@@ -3,7 +3,7 @@ import pygame, numpy, random
 # Debug settings
 DRAW_HITBOX = False
 PRINT_TIME = False
-CAN_DIE = False
+CAN_DIE = True
 
 # Window settings
 WINDOW_HEIGHT = 750
@@ -93,3 +93,6 @@ YELLOW_WAVE = pygame.image.load("view/soundwave_yellow.png")
 WAVE_ARRAY = [BLACK_WAVE, BLUE_WAVE, GREEN_WAVE, GREY_WAVE, WHITE_WAVE, ORANGE_WAVE, PINK_WAVE, PURPLE_WAVE, RED_WAVE, YELLOW_WAVE]
 
 CLOUD_WHITE = pygame.image.load("view/cloud.png")
+CLOUD_GREY = pygame.image.load("view/cloud_grey.png")
+CLOUD_BLACK = pygame.image.load("view/cloud_black.png")
+BLIKSEM = pygame.image.load("view/lightning.png")
