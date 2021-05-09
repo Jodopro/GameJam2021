@@ -22,6 +22,8 @@ class Bird(Enemy):
         self.shooting_counter = 0
         self.width = 100
         self.height = 50
+        self.burst_counter = 0
+        self.burst_wait_counter = 0
 
     def draw(self):
         if self.speed[0] < 0:
@@ -38,9 +40,16 @@ class Bird(Enemy):
             rel_y = self.game.ship.pos[1]-self.pos[1]+self.aim_offset
             if (rel_x > 0 and self.speed[0] > 0) or (rel_x < 0 and self.speed[0] < 0):
                 direction = np.array([rel_x, rel_y])
-                new_wave = Soundwave(self.game, self.pos, self.speed, direction, True)
-                self.game.add_object(new_wave)
                 self.shooting_counter = 0
+                if self.burst_counter < BIRD_BURST:
+                    new_wave = Soundwave(self.game, self.pos, self.speed, direction, True)
+                    self.game.add_object(new_wave)
+                    self.burst_counter += 1
+                else:
+                    self.burst_wait_counter += 1
+                    if self.burst_wait_counter == BIRD_BURST_WAIT:
+                        self.burst_counter = 0
+                        self.burst_wait_counter = 0
 
     def update(self, dt):
         super().update(dt)
