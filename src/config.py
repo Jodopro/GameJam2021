@@ -42,9 +42,6 @@ HOUSE_IMG = pygame.image.load("view/house_2.png")
 POLICE_BOX = pygame.image.load("view/police_box.png")
 POLICE_BOX_SHINY = pygame.image.load("view/police_box_shiny.png")
 # HOUSE_IMG = POLICE_BOX_SHINY
-if random.random() < 0.1:
-    HOUSE_IMG = POLICE_BOX
-    if random.random() < 0.2: HOUSE_IMG = POLICE_BOX_SHINY
 BALLOON_IMG = pygame.image.load("view/balloon.png")
 RANDOM_BIRD_IMG = pygame.image.load("view/spaceship_green.png")
 RANDOM_BIRD_FLIP_IMG = pygame.transform.flip(RANDOM_BIRD_IMG, True, False)

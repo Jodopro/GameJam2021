@@ -26,6 +26,11 @@ class Ship(Obstacle):
         self.shooting_counter = PLAYER_SHOOTING_DELAY
         self.balloon = Balloon(game, ship=self)
         self.battery = PLAYER_BATTERY_SIZE
+        self.skin = HOUSE_IMG
+        if random.random() < .1:
+            self.skin = POLICE_BOX
+            if random.random() < .2:
+                self.skin = POLICE_BOX_SHINY
 
     def update_battery(self, dt):
         if self.shooting:
@@ -93,6 +98,6 @@ class Ship(Obstacle):
         self.balloon.update(dt)
 
     def draw(self):
-        self.game.view.draw_image(self.pos[0], self.pos[1], HOUSE_IMG, self.width, self.height)
+        self.game.view.draw_image(self.pos[0], self.pos[1], self.skin, self.width, self.height)
         self.game.view.draw_hitbox(self.get_hitbox(), color=self.color)
         self.balloon.draw()
