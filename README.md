@@ -18,29 +18,4 @@ and then run main.py:\
 
 
 
-classes:
-Game (keeps track of all objects)
-Ship
-Obstacle
-    Cloud (starts as gray, turns either white or dark grey (thunder), hint where the thunder will strike under the cloud by showing some kind of warning, random x coordinate)
-    Bird
-    Plane
-    Alien
-    Policebox?
-Enemy (all enemies are obstacles)
-    Bird
-    Plane
-    Alien
-    
-Attack
-    SoundWave
-    Bliksem
-
-Drawable & Updatable
-    Ship
-    Obstacle
-    Enemy
-    Attack
-
-
 
