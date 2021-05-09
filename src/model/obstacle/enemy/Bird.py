@@ -9,7 +9,8 @@ class Bird(Enemy):
     def __init__(self, game):
         super().__init__(game)
         self.game = game
-        y = game.ship.pos[1] + WINDOW_HEIGHT//2 - PLAYER_OFFSET + random.randrange(WINDOW_HEIGHT//2)
+        temp_y = int((1-BIRD_SPAWN_PLACE)*WINDOW_HEIGHT) + random.randrange(int(WINDOW_HEIGHT*BIRD_SPAWN_PLACE))
+        y = game.ship.pos[1] - PLAYER_OFFSET + temp_y
         v_speed = random.randrange(50, 100)
         if random.random() > 0.5:
             x = 0

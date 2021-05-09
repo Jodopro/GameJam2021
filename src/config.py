@@ -3,7 +3,7 @@ import pygame, numpy, random
 # Debug settings
 DRAW_HITBOX = False
 PRINT_TIME = False
-CAN_DIE = False
+CAN_DIE = True
 
 # Window settings
 WINDOW_HEIGHT = 750
@@ -20,6 +20,7 @@ PLAYER_BATTERY_CONSUME = 25
 PLAYER_BATTERY_MINIMUM_FACTOR = 0.1
 
 # Enemy settings
+BIRD_SPAWN_PLACE = 0.25
 BIRD_SHOOTING_DELAY = 0.1
 BIRD_BURST = 3
 BIRD_BURST_WAIT = 3
