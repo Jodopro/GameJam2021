@@ -4,7 +4,7 @@ set up virtual environment:\
 
 activate virtual environment:\
 `. ./venv/bin/activate` on ubuntu \
-`.\venv\Scripts\active` for windows
+`source ./venv/Scripts/activate` for windows
 
 
 and subsequently install the requirements:\
