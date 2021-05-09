@@ -1,7 +1,7 @@
 import pygame, numpy, random
 
 # Debug settings
-DRAW_HITBOX = False
+DRAW_HITBOX = True
 PRINT_TIME = False
 
 # Window settings

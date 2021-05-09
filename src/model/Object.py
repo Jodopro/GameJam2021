@@ -5,8 +5,9 @@ class Object:
     pos = np.array([0.0, 0.0])
     speed = np.array([0.0, 0.0])
     acc = np.array([0.0, 0.0])
+    color = (255,255,255)
 
-    def __init__(self,game):
+    def __init__(self, game):
         self.game = game
 
     def set_pos(self, new_position):

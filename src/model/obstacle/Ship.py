@@ -23,7 +23,7 @@ class Ship(Object):
         self.shooting = False
         self.wants_to_shoot = False
         self.shooting_counter = PLAYER_SHOOTING_DELAY
-        self.balloon = Balloon(game, self)
+        self.balloon = Balloon(game, ship=self)
         self.battery = PLAYER_BATTERY_SIZE
 
     def update_battery(self, dt):
@@ -70,7 +70,7 @@ class Ship(Object):
                     rel_x = mouse_loc[0]-self.pos[0]
                     rel_y = self.game.view.transform_y(self.pos[1]) - mouse_loc[1]
                     direction = np.array([rel_x, rel_y])
-                    new_wave = Soundwave(self.game, self.pos, self.speed, direction)
+                    new_wave = Soundwave(self.game, origin=self.pos, speed=self.speed, direction=direction)
                     self.game.add_object(new_wave)
                     self.shooting_counter = 0
                 else:
@@ -93,5 +93,5 @@ class Ship(Object):
 
     def draw(self):
         self.game.view.draw_image(self.pos[0], self.pos[1], HOUSE_IMG, self.width, self.height)
-        self.game.view.draw_hitbox(self.get_hitbox())
+        self.game.view.draw_hitbox(self.get_hitbox(), color=self.color)
         self.balloon.draw()
