@@ -11,7 +11,7 @@ activate virtual environment:\
 and subsequently install the requirements:\
 `pip install -r requirements.txt`
 
-then, to run, move into the src directory:\
+then, move into the src directory:\
 `cd src`\
 and then run main.py:\
 `python main.py`
