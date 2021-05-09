@@ -47,6 +47,7 @@ BATTERY_60 = pygame.image.load("view/battery_60.png")
 BATTERY_70 = pygame.image.load("view/battery_70.png")
 BATTERY_80 = pygame.image.load("view/battery_80.png")
 BATTERY_90 = pygame.image.load("view/battery_90.png")
+BATTERY_100 = pygame.image.load("view/battery_100.png")
 BATTERY_FULL = pygame.image.load("view/battery_full.png")
 BATTERY_ARRAY = [
     (0, BATTERY_EMPTY),
@@ -59,5 +60,5 @@ BATTERY_ARRAY = [
     (70, BATTERY_70),
     (80, BATTERY_80),
     (90, BATTERY_90),
-    (100, BATTERY_FULL)]
+    (100, BATTERY_100)]
 
