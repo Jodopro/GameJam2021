@@ -31,7 +31,7 @@ class Bird(Enemy):
         else:
             image = BIRD_FLIP_IMG
         self.game.view.draw_image(self.pos[0], self.pos[1], image, self.width, self.height)
-        self.game.view.draw_hitbox(self.get_hitbox())
+        self.game.view.draw_hitbox(self.get_hitbox(), self.color)
 
     def update_shooting(self, dt):
         self.shooting_counter += dt
@@ -42,7 +42,7 @@ class Bird(Enemy):
                 direction = np.array([rel_x, rel_y])
                 self.shooting_counter = 0
                 if self.burst_counter < BIRD_BURST:
-                    new_wave = Soundwave(self.game, self.pos, self.speed, direction, True)
+                    new_wave = Soundwave(self.game, origin=self.pos, speed=self.speed, direction=direction)
                     self.game.add_object(new_wave)
                     self.burst_counter += 1
                 else:

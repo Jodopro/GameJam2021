@@ -1,26 +1,25 @@
 import pygame
 import numpy as np
 
+from model.obstacle.Obstacle import Obstacle
 from model.obstacle.attack.Attack import Attack
 
 from config import *
 
+
 class Soundwave(Attack):
-    def __init__(self, game, origin, speed, direction, is_enemy=False):
-        super().__init__(game)
-        self.game = game
+
+    def __init__(self, *args, speed, direction, color=(0, 255, 0), width=10, height=10, origin=None,
+                 **kwargs):
+        super().__init__(*args, color=color, width=width, height=height, direction=direction, **kwargs)
         self.pos = origin.copy()
         self.speed = speed.copy()
-        self.direction = direction/np.linalg.norm(direction)
-        self.speed += self.direction*WAVE_SPEED
-        self.width = 10
-        self.height = 10
-        self.color = (0, 255, 0)
-        self.is_enemy = is_enemy
+        self.speed += self.direction * WAVE_SPEED
+        # todo: remove the is_enemy, replace it by self.nature
 
     def draw(self):
-        self.game.view.draw_hitbox(self.get_hitbox())
-        if self.is_enemy:
+        self.game.view.draw_hitbox(self.get_hitbox(), self.color)
+        if self.nature == Obstacle.Nature.Hostile:
             self.game.view.draw_image(self.pos[0], self.pos[1], WAVE_ENEMY_PNG, self.width, 10, self.direction)
         else:
             self.game.view.draw_image(self.pos[0], self.pos[1], WAVE_RAINBOW_PNG, self.width, 10, self.direction)

@@ -102,19 +102,75 @@ def detect_collision(p1, p2):
     return True
 
 
+def detect_collision_pairs(ps1, ps2):
+    """
+    detect collision between two lists of convex polygons.
+    :param ps1: first list of convex polygons
+    :param ps2: second list of convex polygons
+    :return: all pairs of (p1,p2) that collide where p1 in ps1 and p2 in ps2
+    """
+    pairs = []
+    perps = [{},{}]
+    for i in range(len(ps1)):
+        p1 = ps1[i]
+        ps = []
+        edges = find_edges(p1)
+        for e in edges:
+            start = np.array(e[0])
+            end = np.array(e[1])
+            ps.append(perpendicular(end - start))
+        perps[0][i] = ps
+    for j in range(len(ps2)):
+        p2 = ps2[j]
+        ps = []
+        edges = find_edges(p2)
+        for e in edges:
+            start = np.array(e[0])
+            end = np.array(e[1])
+            ps.append(perpendicular(end - start))
+        perps[1][j] = ps
+    for i in range(len(ps1)):
+        p1 = ps1[i]
+        # todo: dynamically store bounds of projection scalars of vertices onto perpendiculars.
+        # p1_scalars = []
+        # for p in ps1_perps[p1]: # perpendicular
+        #     p1_scalars.append(projection_scalars(p1, p))
+        for j in range(len(ps2)):
+            p2 = ps2[j]
+            no_collision = False
+            for p in [x for x in perps[0][i] or x in perps[1][j]]:
+                scalars = []
+                scalars.append(projection_scalars(p1, p))
+                scalars.append(projection_scalars(p2, p))
+                bounds = []
+                for s in scalars:
+                    bounds.append([min(s), max(s)])
+                a, b = bounds[0]  # p1
+                c, d = bounds[1]  # p2
+                if (a < c and b < c) or (b > d and a > d):
+                    no_collision = True
+                    break
+            if no_collision:
+                continue
+            pairs.append((i, j))
+    return pairs
+
+
 def rotate_in_direction(v, dir):
-    rot_mat = np.dot(dir, np.array([[[0,1],[1,0]],[[-1,0],[0,1]]]))
+    rot_mat = np.dot(dir, np.array([[[0, 1], [1, 0]], [[-1, 0], [0, 1]]]))
     return np.dot(rot_mat, v)
 
+
 def direction(angle):
-    a = angle/360*2*math.pi
+    a = angle / 360 * 2 * math.pi
     return [math.sin(a), math.cos(a)]
+
 
 if __name__ == '__main__':
     square1 = np.array([[1, 3], [3, 3], [3, 1], [1, 1]])
-    square2 = np.array([v + [1,1] for v in square1])
-    square3 = np.array([v + [1,1] for v in square2])
-    square4 = np.array([v + [1,1] for v in square3])
+    square2 = np.array([v + [1, 1] for v in square1])
+    square3 = np.array([v + [1, 1] for v in square2])
+    square4 = np.array([v + [1, 1] for v in square3])
     print(detect_collision(square1, square2))
     print(detect_collision(square1, square3))
     print(detect_collision(square1, square4))

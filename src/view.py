@@ -74,11 +74,11 @@ class View:
             pygame.Surface.blit(self.window, BACKGROUND_IMG, rect)
             y += 200
 
-    def draw_hitbox(self, box):
+    def draw_hitbox(self, box, color):
         if DRAW_HITBOX:
             edges = list(zip(box, np.append(box[1:], [box[0]], axis=0)))
             for e in edges:
                 for pos in e:
                     pos[0] = self.transform_x(pos[0])
                     pos[1] = self.transform_y(pos[1])
-                pygame.draw.line(self.window, (255, 0, 0), e[0], e[1])
+                pygame.draw.line(self.window, color, e[0], e[1])
