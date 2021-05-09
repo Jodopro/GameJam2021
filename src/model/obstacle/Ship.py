@@ -2,6 +2,7 @@ import numpy as np
 import pygame
 from model.Object import Object
 from model.obstacle.attack.Soundwave import Soundwave
+from model.obstacle.Balloon import Balloon
 
 
 max_speed = np.array([300.0, 400.0])
@@ -14,13 +15,14 @@ class Ship(Object):
 
     def __init__(self, game):
         super().__init__(game)
-        self.ship_width = 25
-        self.ship_height = 35
+        self.ship_width = 50
+        self.ship_height = 75
         self.set_pos([375.0, 100.0])
         self.set_speed([0.0, min_speed[1]])
         self.acc = np.array([0,0])
         self.shooting = False
         self.shooting_counter = shooting_delay
+        self.balloon = Balloon()
 
     def get_hitbox(self):
         a = self.pos + [-self.ship_width/2, self.ship_height/2]
@@ -62,9 +64,10 @@ class Ship(Object):
     def update(self, dt):
         super().update(dt)
         self.update_shooting(dt)
+        self.balloon.update(dt)
 
     def draw(self):
-        scale = 2
-        self.game.view.draw_image(self.pos[0], self.pos[1]+(35*(scale-1)), house, self.ship_width, self.ship_height, scale)
+        self.game.view.draw_image(self.pos[0], self.pos[1], house, self.ship_width, self.ship_height)
         self.game.view.draw_hitbox(self.get_hitbox())
+        self.balloon.draw()
         # self.game.view.draw_rect(self.pos[0], self.pos[1], (255, 0, 0), self.ship_width, self.ship_width)

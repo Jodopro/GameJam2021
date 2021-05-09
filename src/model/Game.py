@@ -1,14 +1,11 @@
-import random
-
 import util
-from model.Ship import Ship
-from model.Ship import max_speed as ship_max_speed
-from model.Ship import min_speed as ship_min_speed
+from model.obstacle.Ship import Ship
+from model.obstacle.Ship import max_speed as ship_max_speed
+from model.obstacle.Ship import min_speed as ship_min_speed
 from model.obstacle.Obstacle import Obstacle
 from model.obstacle.enemy.Plane import Plane
 from view import View
 
-from model.Object import Object
 from model.obstacle.enemy.Bird import Bird
 
 game_height = 10000

@@ -1,4 +1,4 @@
-import pygame
+import pygame, math
 import numpy as np
 
 PLAYER_OFFSET = 100
@@ -64,12 +64,11 @@ class View:
                 new_posses.append((t_x + x_new, t_y + y_new))
             pygame.draw.polygon(self.window, color, new_posses)
 
-    def draw_image(self, x, y, image, width, height, scale):
-        t_width = width * scale
-        t_height = height * scale
-        image = pygame.transform.scale(image, (t_width, t_height))
-        rect = pygame.Rect(self.transform_x(x) - t_width // 2, self.transform_y(y), t_width, t_height)
-        pygame.Surface.blit(self.window, image, rect)
+    def draw_image(self, x, y, image, width, height, direction=[0, 1]):
+        image = pygame.transform.scale(image, (int(width), int(height)))
+        angle = -math.degrees(math.atan2(direction[0], direction[1]))
+        image = pygame.transform.rotate(image, angle)
+        pygame.Surface.blit(self.window, image, (self.transform_x(x) - image.get_width()//2,self.transform_y(y) - image.get_height()//2))
 
     def draw_background(self):
         offset = self.game.ship.pos[1] % 200
