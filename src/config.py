@@ -37,6 +37,7 @@ WAVE_WIDTH_EXPANSION = 50
 
 # Images
 BACKGROUND_IMG = pygame.image.load("view/background_sky.png")
+BACKGROUND_IMG_STARS = pygame.image.load("view/ugly_background.png")
 HOUSE_IMG = pygame.image.load("view/house_2.png")
 POLICE_BOX = pygame.image.load("view/police_box.png")
 POLICE_BOX_SHINY = pygame.image.load("view/police_box_shiny.png")

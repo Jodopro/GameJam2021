@@ -1,3 +1,5 @@
+import time
+
 import pygame, math
 import numpy as np
 
@@ -67,6 +69,9 @@ class View:
         pygame.Surface.blit(self.window, image, (self.transform_x(x) - image.get_width()//2,self.transform_y(y) - image.get_height()//2))
 
     def draw_background(self):
+        background = BACKGROUND_IMG
+        if time.time() - self.game.start_time > 60:
+            background = BACKGROUND_IMG_STARS
         offset = self.game.ship.pos[1] % 200
         y = offset - 200
         for i in range(11):
