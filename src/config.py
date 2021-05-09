@@ -1,4 +1,4 @@
-import pygame, numpy
+import pygame, numpy, random
 
 # Debug settings
 DRAW_HITBOX = False
@@ -31,7 +31,8 @@ WAVE_WIDTH_EXPANSION = 50
 
 # Images
 BACKGROUND_IMG = pygame.image.load("view/ugly_background2.png")
-HOUSE_IMG = pygame.image.load("view/house.png")  # replace with "view/police_box.png" for a cool B-skin B)
+HOUSE_IMG = pygame.image.load("view/house.png")
+if random.random() < 0.1: HOUSE_IMG = pygame.image.load("view/police_box.png")
 BALLOON_IMG = pygame.image.load("view/balloon.png")
 BIRD_IMG = pygame.image.load("view/spaceship.png")
 BIRD_FLIP_IMG = pygame.transform.flip(BIRD_IMG, True, False)
