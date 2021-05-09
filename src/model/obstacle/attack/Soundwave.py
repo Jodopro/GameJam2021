@@ -24,9 +24,9 @@ class Soundwave(Attack):
     def draw(self):
         self.game.view.draw_hitbox(self.get_hitbox())
         if self.is_enemy:
-            pass
+            self.game.view.draw_image(self.pos[0], self.pos[1], WAVE_ENEMY_PNG, self.width, 10, self.direction)
         else:
-            self.game.view.draw_image(self.pos[0], self.pos[1], WAVE_PNG, self.width, 10, self.direction)
+            self.game.view.draw_image(self.pos[0], self.pos[1], WAVE_RAINBOW_PNG, self.width, 10, self.direction)
 
     def update(self, dt):
         super().update(dt)
