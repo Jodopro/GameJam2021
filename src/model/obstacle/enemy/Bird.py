@@ -4,6 +4,7 @@ import random
 import numpy as np
 from config import *
 
+space_bird_flip = pygame.image.load("view/spaceship_flip.png")
 
 class Bird(Enemy):
     def __init__(self, game):
@@ -24,7 +25,11 @@ class Bird(Enemy):
         self.height = 50
 
     def draw(self):
-        self.game.view.draw_image(self.pos[0], self.pos[1], BIRD_IMG, self.width, self.height)
+        if self.speed[0] < 0:
+            image = BIRD_IMG
+        else:
+            image = space_bird_flip
+        self.game.view.draw_image(self.pos[0], self.pos[1], image, self.width, self.height)
         self.game.view.draw_hitbox(self.get_hitbox())
 
     def update_shooting(self, dt):
@@ -34,7 +39,7 @@ class Bird(Enemy):
             rel_y = self.game.ship.pos[1]-self.pos[1]+self.aim_offset
             if (rel_x > 0 and self.speed[0] > 0) or (rel_x < 0 and self.speed[0] < 0):
                 direction = np.array([rel_x, rel_y])
-                new_wave = Soundwave(self.game, self.pos, self.speed, direction)
+                new_wave = Soundwave(self.game, self.pos, self.speed, direction, True)
                 self.game.add_object(new_wave)
                 self.shooting_counter = 0
 
