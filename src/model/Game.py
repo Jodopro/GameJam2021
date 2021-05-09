@@ -5,10 +5,13 @@ from model.obstacle.Ship import Ship
 from model.obstacle.Obstacle import Obstacle
 from model.obstacle.enemy.Plane import Plane
 from model.obstacle.attack.Soundwave import Soundwave
-from model.Battery import Battery
+from model.BatteryDisplayer import BatteryDisplayer
+from model.ScoreDisplayer import ScoreDisplayer
 from view import View
 
 from model.obstacle.enemy.Bird import Bird
+from model.obstacle.enemy.AimedBird import AimedBird
+from model.obstacle.enemy.ConstantBird import ConstantBird
 
 
 class Game:
@@ -31,13 +34,19 @@ class Game:
         # self.spawn_objects()
         self.finished = False
         self.spawning_counter = 0
-        self.battery = Battery(self)
+        self.battery = BatteryDisplayer(self)
+        self.score_displayer = ScoreDisplayer(self)
 
     def update_spawner(self, dt):
         self.spawning_counter += dt
         if self.spawning_counter >= self.enemy_spawning_delay:
             self.enemy_spawning_delay *= BIRD_SPAWNING_DELAY_UPDATE_PERCENTAGE
-            bird = Bird(self)
+            if random.random()>0.5:
+                bird = ConstantBird(self)
+            elif random.random()>0.5:
+                bird = Bird(self)
+            else:
+                bird = AimedBird(self)
             self.add_object(bird)
             self.spawning_counter = 0
 
@@ -108,6 +117,7 @@ class Game:
         for o in self.objects:
             o.draw()
         self.battery.draw()
+        self.score_displayer.draw()
 
     def add_object(self, o):
         self.objects.append(o)

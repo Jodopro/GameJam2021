@@ -3,7 +3,7 @@ import pygame, numpy, random
 # Debug settings
 DRAW_HITBOX = False
 PRINT_TIME = False
-CAN_DIE = True
+CAN_DIE = False
 
 # Window settings
 WINDOW_HEIGHT = 750
@@ -28,6 +28,7 @@ BIRD_SPAWNING_DELAY_START = 1
 BIRD_SPAWNING_DELAY_UPDATE_PERCENTAGE = 0.99
 
 # Other settings
+FONT = pygame.font.SysFont(None, 48)
 WAVE_SPEED = 500
 WAVE_WIDTH_EXPANSION = 50
 
@@ -36,8 +37,12 @@ BACKGROUND_IMG = pygame.image.load("view/ugly_background2.png")
 HOUSE_IMG = pygame.image.load("view/house.png")
 if random.random() < 0.1: HOUSE_IMG = pygame.image.load("view/police_box.png")
 BALLOON_IMG = pygame.image.load("view/balloon.png")
-BIRD_IMG = pygame.image.load("view/spaceship.png")
+BIRD_IMG = pygame.image.load("view/spaceship_green.png")
 BIRD_FLIP_IMG = pygame.transform.flip(BIRD_IMG, True, False)
+CONSTANT_BIRD_IMG = pygame.image.load("view/spaceship_red.png")
+CONSTANT_BIRD_FLIP_IMG = pygame.transform.flip(BIRD_IMG, True, False)
+AIMED_BIRD_IMG = pygame.image.load("view/spaceship_purple.png")
+AIMED_BIRD_FLIP_IMG = pygame.transform.flip(BIRD_IMG, True, False)
 WAVE_ENEMY_PNG = pygame.image.load("view/soundwave_purple.png")
 WAVE_RAINBOW_PNG = pygame.image.load("view/soundwave_green.png")
 BATTERY_EMPTY = pygame.image.load("view/battery_empty.png")
