@@ -27,19 +27,17 @@ class Bird(Enemy):
         self.burst_wait_counter = 0
 
     def draw(self):
+        # should never be used
         if self.speed[0] < 0:
-            image = BIRD_IMG
+            image = BALLOON_IMG
         else:
-            image = BIRD_FLIP_IMG
+            image = BALLOON_IMG
         self.game.view.draw_image(self.pos[0], self.pos[1], image, self.width, self.height)
         self.game.view.draw_hitbox(self.get_hitbox(), self.color)
 
     def get_direction(self):
-        if self.speed[0]>0:
-            rel_x = random.random()
-        else:
-            rel_x = -random.random()
-        rel_y = -random.random()
+        rel_x = 1
+        rel_y = 1
         return np.array([rel_x, rel_y])
 
     def update_shooting(self, dt):
