@@ -13,7 +13,7 @@ and subsequently install the requirements:\
 
 then, move into the src directory:\
 `cd src`\
-and then run main.py:\
+and run main.py:\
 `python main.py`
 
 
