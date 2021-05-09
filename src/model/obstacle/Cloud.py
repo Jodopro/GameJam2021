@@ -7,6 +7,8 @@ from model.obstacle.attack.Bliksem import Bliksem
 from config import *
 import numpy as np
 
+from config import *
+
 bliksem_delay = 2.0
 
 class Cloud(Obstacle):
@@ -28,8 +30,8 @@ class Cloud(Obstacle):
 
 
     def draw(self):
-        super().draw()
-        # draw a cloud with appropriate color
+        self.game.view.draw_image(self.pos[0], self.pos[0], CLOUD_WHITE, self.width, self.height)
+
 
     def update(self, d_t):
         super().update(d_t)
