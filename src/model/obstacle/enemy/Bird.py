@@ -4,7 +4,6 @@ import random
 import numpy as np
 from config import *
 
-space_bird_flip = pygame.image.load("view/spaceship_flip.png")
 
 class Bird(Enemy):
     def __init__(self, game):
@@ -28,7 +27,7 @@ class Bird(Enemy):
         if self.speed[0] < 0:
             image = BIRD_IMG
         else:
-            image = space_bird_flip
+            image = BIRD_FLIP_IMG
         self.game.view.draw_image(self.pos[0], self.pos[1], image, self.width, self.height)
         self.game.view.draw_hitbox(self.get_hitbox())
 
