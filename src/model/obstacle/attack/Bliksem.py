@@ -4,7 +4,7 @@ import numpy as np
 
 class Bliksem(Attack):
     def __init__(self, *args, origin, speed=np.array([0.0,0.0]), **kwargs):
-        super().__init__(*args, speed=speed, origin=origin, direction=[0.0,-1.0], width=10, height=50, **kwargs)
+        super().__init__(*args, speed=speed, origin=origin, direction=[0.0,-1.0], width=20, height=100, **kwargs)
         # self.pos = origin.copy()
         self.speed = np.array(self.direction) * BLIKSEM_SPEED
 
