@@ -1,7 +1,6 @@
-import pygame
 from model.obstacle.Obstacle import Obstacle
 
-BALLOON_IMAGE = pygame.image.load("view/balloon.png")
+from config import *
 
 
 class Balloon(Obstacle): 
@@ -17,5 +16,5 @@ class Balloon(Obstacle):
         self.pos[1] += 75
 
     def draw(self):
-        self.game.view.draw_image(self.pos[0], self.pos[1], BALLOON_IMAGE, self.width, self.height)
+        self.game.view.draw_image(self.pos[0], self.pos[1], BALLOON_IMG, self.width, self.height)
         self.game.view.draw_hitbox(self.get_hitbox())

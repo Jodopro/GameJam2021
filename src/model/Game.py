@@ -1,7 +1,6 @@
 import util
+from config import *
 from model.obstacle.Ship import Ship
-from model.obstacle.Ship import max_speed as ship_max_speed
-from model.obstacle.Ship import min_speed as ship_min_speed
 from model.obstacle.Obstacle import Obstacle
 from model.obstacle.enemy.Plane import Plane
 from view import View
@@ -21,9 +20,6 @@ class Game:
         self.objects = []
         self.spawn_objects()
         self.finished = False
-        width, height = window.get_size()
-        self.window_width = width
-        self.window_height = height
         self.spawning_counter = 0
 
     def update_spawner(self, dt):
@@ -39,11 +35,11 @@ class Game:
         garbage = []
         for o in self.objects:
             o.update(dt)
-            if (o.pos[0] < -0.1*self.window_width) or (o.pos[0] > 1.1*self.window_width):
+            if (o.pos[0] < -0.1*WINDOW_HEIGHT) or (o.pos[0] > 1.1*WINDOW_WIDTH):
                 garbage.append(o)
-            elif (o.pos[1] < self.ship.pos[1] - (self.window_height*0.1)) and (o.speed[1] < ship_min_speed[1]):
+            elif (o.pos[1] < self.ship.pos[1] - (WINDOW_HEIGHT*0.1)) and (o.speed[1] < PLAYER_MIN_SPEED[1]):
                 garbage.append(o)
-            elif (o.pos[1] > self.ship.pos[1] + (self.window_height*1.1)) and (o.speed[1] > ship_max_speed[1]):
+            elif (o.pos[1] > self.ship.pos[1] + (WINDOW_HEIGHT*1.1)) and (o.speed[1] > PLAYER_MAX_SPEED[1]):
                 garbage.append(o)
         self.check_collisions()
         for o in garbage:

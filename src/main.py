@@ -1,6 +1,7 @@
 import pygame, sys, time, math, random
 from pygame.locals import *
 from model.Game import Game
+from config import *
 
 pygame.init()
 
@@ -15,8 +16,6 @@ YELLOW = (255, 255, 0)
 
 basicFont = pygame.font.SysFont(None, 48)
 
-WINDOW_HEIGHT = 1000
-WINDOW_WIDTH = 750
 window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), 0, 32)
 
 
@@ -102,7 +101,8 @@ def run_game(current_pressed):
                 elif event.key == K_SPACE:
                     game.ship.shooting = False
         dt = currentTime - lastTime
-        print(dt)
+        if PRINT_TIME:
+            print(dt)
         game.update(dt)
         game.draw()
         pygame.display.update()

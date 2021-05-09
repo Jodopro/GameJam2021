@@ -1,14 +1,8 @@
 import numpy as np
-import pygame
 from model.Object import Object
 from model.obstacle.attack.Soundwave import Soundwave
 from model.obstacle.Balloon import Balloon
-
-
-max_speed = np.array([300.0, 400.0])
-min_speed = np.array([-max_speed[0], 200.0])
-shooting_delay = 0.1
-house = pygame.image.load("view/house.png")
+from config import *
 
 
 class Ship(Object):
@@ -18,10 +12,10 @@ class Ship(Object):
         self.width = 50
         self.height = 75
         self.set_pos([375.0, 100.0])
-        self.set_speed([0.0, min_speed[1]])
+        self.set_speed([0.0, PLAYER_MIN_SPEED[1]])
         self.acc = np.array([0,0])
         self.shooting = False
-        self.shooting_counter = shooting_delay
+        self.shooting_counter = PLAYER_SHOOTING_DELAY
         self.balloon = Balloon(game, self)
 
     def get_hitbox(self):
@@ -34,15 +28,15 @@ class Ship(Object):
     def update_speed(self, dt):
         super().update_speed(dt)
         for i in range(len(self.speed)):
-            if self.speed[i] > max_speed[i]:
-                self.speed[i] = max_speed[i]
-            if self.speed[i] < min_speed[i]:
-                self.speed[i] = min_speed[i]
+            if self.speed[i] > PLAYER_MAX_SPEED[i]:
+                self.speed[i] = PLAYER_MAX_SPEED[i]
+            if self.speed[i] < PLAYER_MIN_SPEED[i]:
+                self.speed[i] = PLAYER_MIN_SPEED[i]
 
     def update_shooting(self, dt):
         self.shooting_counter += dt
-        if self.shooting_counter >= shooting_delay:
-            self.shooting_counter = shooting_delay
+        if self.shooting_counter >= PLAYER_SHOOTING_DELAY:
+            self.shooting_counter = PLAYER_SHOOTING_DELAY
             if self.shooting:
                 mouse_loc = pygame.mouse.get_pos()
                 rel_x = mouse_loc[0]-self.pos[0]
@@ -57,8 +51,8 @@ class Ship(Object):
         if self.pos[0] < 0 + self.width//2:
             self.pos[0] = 0 + self.width//2
             self.speed[0] = 0
-        elif self.pos[0] > self.game.window_width - self.width//2:
-            self.pos[0] = self.game.window_width - self.width//2
+        elif self.pos[0] > WINDOW_WIDTH - self.width//2:
+            self.pos[0] = WINDOW_WIDTH - self.width//2
             self.speed[0] = 0
 
     def update(self, dt):
@@ -67,7 +61,6 @@ class Ship(Object):
         self.balloon.update(dt)
 
     def draw(self):
-        self.game.view.draw_image(self.pos[0], self.pos[1], house, self.width, self.height)
+        self.game.view.draw_image(self.pos[0], self.pos[1], HOUSE_IMG, self.width, self.height)
         self.game.view.draw_hitbox(self.get_hitbox())
         self.balloon.draw()
-        # self.game.view.draw_rect(self.pos[0], self.pos[1], (255, 0, 0), self.ship_width, self.ship_width)

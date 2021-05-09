@@ -3,10 +3,7 @@ import numpy as np
 
 from model.obstacle.attack.Attack import Attack
 
-WAVE_SPEED = 500
-WIDTH_EXPANSION = 50
-WAVE_ENEMY_PNG = pygame.image.load("view/rainbow_wave.png")
-WAVE_RAINBOW_PNG = pygame.image.load("view/enemy_wave.png")
+from config import *
 
 class Soundwave(Attack):
     def __init__(self, game, origin, speed, direction, is_enemy=False):
@@ -30,4 +27,4 @@ class Soundwave(Attack):
 
     def update(self, dt):
         super().update(dt)
-        self.width += dt * WIDTH_EXPANSION
+        self.width += dt * WAVE_WIDTH_EXPANSION

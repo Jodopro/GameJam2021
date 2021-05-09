@@ -1,20 +1,16 @@
 import pygame, math
 import numpy as np
 
-PLAYER_OFFSET = 100
-BACKGROUND_IMG = pygame.image.load("view/ugly_background2.png")
+from config import *
 
 
 class View:
     def __init__(self, game, window):
-        width, height = window.get_size()
-        self.window_width = width
-        self.window_height = height
         self.game = game
         self.window = window
 
     def transform_y(self, y):
-        return self.window_height - PLAYER_OFFSET - (y - self.game.ship.pos[1])
+        return WINDOW_HEIGHT - PLAYER_OFFSET - (y - self.game.ship.pos[1])
 
     def transform_x(self, x):
         return x
@@ -79,9 +75,10 @@ class View:
             y += 200
 
     def draw_hitbox(self, box):
-        edges = list(zip(box, np.append(box[1:], [box[0]], axis=0)))
-        for e in edges:
-            for pos in e:
-                pos[0] = self.transform_x(pos[0])
-                pos[1] = self.transform_y(pos[1])
-            pygame.draw.line(self.window, (255, 0, 0), e[0], e[1])
+        if DRAW_HITBOX:
+            edges = list(zip(box, np.append(box[1:], [box[0]], axis=0)))
+            for e in edges:
+                for pos in e:
+                    pos[0] = self.transform_x(pos[0])
+                    pos[1] = self.transform_y(pos[1])
+                pygame.draw.line(self.window, (255, 0, 0), e[0], e[1])
