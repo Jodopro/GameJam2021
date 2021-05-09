@@ -18,7 +18,7 @@ class Ship(Obstacle):
         super().__init__(game, nature=Obstacle.Nature.Friendly)
         self.width = 50
         self.height = 75
-        self.set_pos([375.0, 100.0])
+        self.set_pos([WINDOW_WIDTH//2, 100.0])
         self.set_speed([0.0, PLAYER_MIN_SPEED[1]])
         self.acc = np.array([0,0])
         self.shooting = False
