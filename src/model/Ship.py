@@ -8,6 +8,7 @@ max_speed = np.array([300.0, 400.0])
 min_speed = np.array([-max_speed[0], 200.0])
 shooting_delay = 0.1
 house = pygame.image.load("view/house.png")
+bloon = pygame.image.load("view/balloon.png")
 
 
 class Ship(Object):
@@ -67,4 +68,5 @@ class Ship(Object):
         scale = 2
         self.game.view.draw_image(self.pos[0], self.pos[1]+(35*(scale-1)), house, self.ship_width, self.ship_height, scale)
         self.game.view.draw_hitbox(self.get_hitbox())
+        self.game.view.draw_image(self.pos[0], self.pos[1] + 100, bloon, 25, 35, 2)
         # self.game.view.draw_rect(self.pos[0], self.pos[1], (255, 0, 0), self.ship_width, self.ship_width)
