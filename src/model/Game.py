@@ -165,12 +165,6 @@ class Game:
             self.hostile_obstacles.remove(o)
 
 
-    def spawn_objects(self):
-        # spawn some objects for demo purposes,
-        plane = Plane(self)
-        plane.set_pos(self.ship.pos + [0, 500])
-        self.add_object(plane)
-
 
     def collision(self, o1, o2):
         return util.detect_collision(o1.get_hitbox(), o2.get_hitbox())
