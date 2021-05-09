@@ -22,7 +22,10 @@ class Soundwave(Attack):
         if self.nature == Obstacle.Nature.Hostile:
             self.game.view.draw_image(self.pos[0], self.pos[1], WAVE_ENEMY_PNG, self.width, 10, self.direction)
         else:
-            self.game.view.draw_image(self.pos[0], self.pos[1], WAVE_RAINBOW_PNG, self.width, 10, self.direction)
+            wave = WAVE_RAINBOW_PNG
+            if (HOUSE_IMG == POLICE_BOX_SHINY):
+                wave = WAVE_ARRAY[int(10*random.random())]
+            self.game.view.draw_image(self.pos[0], self.pos[1], wave, self.width, 10, self.direction)
 
     def update(self, dt):
         super().update(dt)

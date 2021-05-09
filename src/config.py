@@ -33,8 +33,13 @@ WAVE_WIDTH_EXPANSION = 50
 
 # Images
 BACKGROUND_IMG = pygame.image.load("view/background_sky.png")
-HOUSE_IMG = pygame.image.load("view/house.png")
-if random.random() < 0.1: HOUSE_IMG = pygame.image.load("view/police_box.png")
+HOUSE_IMG = pygame.image.load("view/house_2.png")
+POLICE_BOX = pygame.image.load("view/police_box.png")
+POLICE_BOX_SHINY = pygame.image.load("view/police_box_shiny.png")
+HOUSE_IMG = POLICE_BOX_SHINY
+if random.random() < 0.1:
+    HOUSE_IMG = POLICE_BOX
+    if random.random() < 0.2: HOUSE_IMG = POLICE_BOX_SHINY
 BALLOON_IMG = pygame.image.load("view/balloon.png")
 BIRD_IMG = pygame.image.load("view/spaceship.png")
 BIRD_FLIP_IMG = pygame.transform.flip(BIRD_IMG, True, False)
@@ -66,3 +71,15 @@ BATTERY_ARRAY = [
     (100, BATTERY_100)]
 EXPLOSION = pygame.image.load("view/splooooooosion.png")
 
+# Sound waves
+BLACK_WAVE = pygame.image.load("view/soundwave_black.png")
+BLUE_WAVE = pygame.image.load("view/soundwave_blue.png")
+GREEN_WAVE = pygame.image.load("view/soundwave_green.png")
+GREY_WAVE = pygame.image.load("view/soundwave_grey.png")
+WHITE_WAVE = pygame.image.load("view/soundwave_house.png")
+ORANGE_WAVE = pygame.image.load("view/soundwave_orange.png")
+PINK_WAVE = pygame.image.load("view/soundwave_pink.png")
+PURPLE_WAVE = pygame.image.load("view/soundwave_purple.png")
+RED_WAVE = pygame.image.load("view/soundwave_red.png")
+YELLOW_WAVE = pygame.image.load("view/soundwave_yellow.png")
+WAVE_ARRAY = [BLACK_WAVE, BLUE_WAVE, GREEN_WAVE, GREY_WAVE, WHITE_WAVE, ORANGE_WAVE, PINK_WAVE, PURPLE_WAVE, RED_WAVE, YELLOW_WAVE]
