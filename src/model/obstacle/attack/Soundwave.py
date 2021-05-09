@@ -9,11 +9,9 @@ from config import *
 
 class Soundwave(Attack):
 
-    def __init__(self, *args, speed, direction, color=(0, 255, 0), width=10, height=10, origin=None,
+    def __init__(self, *args, direction, color=(0, 255, 0), width=10, height=10,
                  **kwargs):
         super().__init__(*args, color=color, width=width, height=height, direction=direction, **kwargs)
-        self.pos = origin.copy()
-        self.speed = speed.copy()
         self.speed += self.direction * WAVE_SPEED
         # todo: remove the is_enemy, replace it by self.nature
 

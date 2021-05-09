@@ -26,6 +26,8 @@ BIRD_BURST = 2
 BIRD_BURST_WAIT = 4
 BIRD_SPAWNING_DELAY = 1
 BIRD_SPAWNING_DELAY_DECREASE = 0.99
+BLIKSEM_SPEED = 900
+
 
 # Other settings
 DIFFICULTY_INCREASE = 1
@@ -89,3 +91,5 @@ PURPLE_WAVE = pygame.image.load("view/soundwave_purple.png")
 RED_WAVE = pygame.image.load("view/soundwave_red.png")
 YELLOW_WAVE = pygame.image.load("view/soundwave_yellow.png")
 WAVE_ARRAY = [BLACK_WAVE, BLUE_WAVE, GREEN_WAVE, GREY_WAVE, WHITE_WAVE, ORANGE_WAVE, PINK_WAVE, PURPLE_WAVE, RED_WAVE, YELLOW_WAVE]
+
+CLOUD_WHITE = pygame.image.load("view/cloud.png")
