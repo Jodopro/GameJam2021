@@ -3,11 +3,17 @@ from model.Object import Object
 from model.obstacle.attack.Soundwave import Soundwave
 from model.obstacle.Balloon import Balloon
 from config import *
+from pygame import mixer
+mixer.init()
+mixer.music.load("Panzerkampf.mp3")
+mixer.music.set_volume(1)
 
 
 class Ship(Object):
 
     def __init__(self, game):
+        mixer.music.play()
+        mixer.music.pause()
         super().__init__(game)
         self.width = 50
         self.height = 75
@@ -15,8 +21,29 @@ class Ship(Object):
         self.set_speed([0.0, PLAYER_MIN_SPEED[1]])
         self.acc = np.array([0,0])
         self.shooting = False
+        self.wants_to_shoot = False
         self.shooting_counter = PLAYER_SHOOTING_DELAY
         self.balloon = Balloon(game, self)
+        self.battery = PLAYER_BATTERY_SIZE
+
+    def update_battery(self, dt):
+        if self.shooting:
+            self.battery -= dt*PLAYER_BATTERY_CONSUME
+            if self.battery < 0:
+                self.battery = 0
+        else:
+            self.battery += dt*PLAYER_BATTERY_CHARGE
+            if self.battery > PLAYER_BATTERY_SIZE:
+                self.battery = PLAYER_BATTERY_SIZE
+        if self.wants_to_shoot and self.battery > PLAYER_BATTERY_SIZE*PLAYER_BATTERY_MINIMUM_FACTOR:
+            self.shooting = True
+            self.wants_to_shoot = False
+            mixer.music.unpause()
+
+    def stop_shooting(self):
+        self.shooting = False
+        self.wants_to_shoot = False
+        mixer.music.pause()
 
     def get_hitbox(self):
         a = self.pos + [-self.width/2, self.height/2]
@@ -38,13 +65,16 @@ class Ship(Object):
         if self.shooting_counter >= PLAYER_SHOOTING_DELAY:
             self.shooting_counter = PLAYER_SHOOTING_DELAY
             if self.shooting:
-                mouse_loc = pygame.mouse.get_pos()
-                rel_x = mouse_loc[0]-self.pos[0]
-                rel_y = self.game.view.transform_y(self.pos[1]) - mouse_loc[1]
-                direction = np.array([rel_x, rel_y])
-                new_wave = Soundwave(self.game, self.pos, self.speed, direction)
-                self.game.add_object(new_wave)
-                self.shooting_counter = 0
+                if self.battery > 0:
+                    mouse_loc = pygame.mouse.get_pos()
+                    rel_x = mouse_loc[0]-self.pos[0]
+                    rel_y = self.game.view.transform_y(self.pos[1]) - mouse_loc[1]
+                    direction = np.array([rel_x, rel_y])
+                    new_wave = Soundwave(self.game, self.pos, self.speed, direction)
+                    self.game.add_object(new_wave)
+                    self.shooting_counter = 0
+                else:
+                    self.stop_shooting()
 
     def update_pos(self, dt):
         self.pos += dt * self.speed
@@ -57,6 +87,7 @@ class Ship(Object):
 
     def update(self, dt):
         super().update(dt)
+        self.update_battery(dt)
         self.update_shooting(dt)
         self.balloon.update(dt)
 

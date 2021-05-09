@@ -1,4 +1,5 @@
-import pygame, sys, time, math, random
+import sys
+import time
 from pygame.locals import *
 from model.Game import Game
 from config import *
@@ -94,7 +95,7 @@ def run_game(current_pressed):
                 elif event.key == K_d:
                     game.ship.acc[0] += 1000
                 elif event.key == K_SPACE:
-                    game.ship.shooting = True
+                    game.ship.wants_to_shoot = True
             elif event.type == KEYUP:
                 if event.key == K_w:
                     game.ship.acc[1] -= 1000
@@ -105,7 +106,7 @@ def run_game(current_pressed):
                 elif event.key == K_d:
                     game.ship.acc[0] -= 1000
                 elif event.key == K_SPACE:
-                    game.ship.shooting = False
+                    game.ship.stop_shooting()
         dt = currentTime - lastTime
         if PRINT_TIME:
             print(dt)
