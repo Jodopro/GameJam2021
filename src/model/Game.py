@@ -3,6 +3,7 @@ from config import *
 from model.obstacle.Ship import Ship
 from model.obstacle.Obstacle import Obstacle
 from model.obstacle.enemy.Plane import Plane
+from model.Battery import Battery
 from view import View
 
 from model.obstacle.enemy.Bird import Bird
@@ -24,6 +25,7 @@ class Game:
         self.spawn_objects()
         self.finished = False
         self.spawning_counter = 0
+        self.battery = Battery(self)
 
     def update_spawner(self, dt):
         self.spawning_counter += dt
@@ -58,14 +60,15 @@ class Game:
         for o in self.objects:
             if isinstance(o, Obstacle):
                 if self.collision(o):
-                    o.color = (255,0,0)
+                    o.color = (255, 0, 0)
 
     def draw(self):
         self.view.window.fill((0, 0, 0))
         self.view.draw_background()
-        self.ship.draw()
         for o in self.objects:
             o.draw()
+        self.ship.draw()
+        self.battery.draw()
 
     def add_object(self, o):
         self.objects.append(o)
