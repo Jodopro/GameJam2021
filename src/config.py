@@ -3,7 +3,7 @@ import pygame, numpy, random
 # Debug settings
 DRAW_HITBOX = False
 PRINT_TIME = False
-CAN_DIE = False
+CAN_DIE = True
 
 # Window settings
 WINDOW_HEIGHT = 750
