@@ -64,4 +64,5 @@ BATTERY_ARRAY = [
     (80, BATTERY_80),
     (90, BATTERY_90),
     (100, BATTERY_100)]
+EXPLOSION = pygame.image.load("view/splooooooosion.png")
 

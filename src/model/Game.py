@@ -3,6 +3,7 @@ from config import *
 from model.obstacle.Balloon import Balloon
 from model.obstacle.Ship import Ship
 from model.obstacle.Obstacle import Obstacle
+from model.obstacle.enemy.Enemy import Enemy
 from model.obstacle.enemy.Plane import Plane
 from model.obstacle.attack.Soundwave import Soundwave
 from model.Battery import Battery
@@ -86,7 +87,9 @@ class Game:
             elif isinstance(friendly, Soundwave):
                 self.remove_object(friendly)
                 del friendly
-            if isinstance(enemy, Soundwave):
+            if isinstance(enemy, Enemy):
+                enemy.get_hit()
+            elif isinstance(enemy, Soundwave):
                 self.remove_object(enemy)
                 del enemy
             # for o in c_p:
@@ -124,6 +127,10 @@ class Game:
             return
         if isinstance(o, Obstacle):
             self.remove_obstacle(o)
+
+    def replace_object(self, o1, o2):
+        self.remove_object(o1)
+        self.add_object(o2)
 
 
     def add_obstacle(self, o):
