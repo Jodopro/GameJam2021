@@ -67,7 +67,8 @@ class View:
     def draw_image(self, x, y, image, width, height, scale):
         t_width = width * scale
         t_height = height * scale
-        image = pygame.transform.scale(image, (t_width, t_height))
+        if scale != 1:
+            image = pygame.transform.scale(image, (t_width, t_height))
         rect = pygame.Rect(self.transform_x(x) - t_width // 2, self.transform_y(y), t_width, t_height)
         pygame.Surface.blit(self.window, image, rect)
 
