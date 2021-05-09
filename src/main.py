@@ -64,6 +64,8 @@ def end_screen(score):
 
 
 def run_game(current_pressed):
+    dt_sum = 0
+    dt_count = 0
     lastTime = time.time()
     game = Game(window)
     game.update(0)
@@ -109,7 +111,9 @@ def run_game(current_pressed):
                     game.ship.stop_shooting()
         dt = currentTime - lastTime
         if PRINT_TIME:
-            print(dt)
+            dt_sum += dt
+            dt_count += 1
+            print(dt_sum/dt_count)
         game.update(dt)
         game.draw()
         pygame.display.update()

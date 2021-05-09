@@ -1,8 +1,9 @@
 import pygame, numpy, random
 
 # Debug settings
-DRAW_HITBOX = True
+DRAW_HITBOX = False
 PRINT_TIME = False
+CAN_DIE = False
 
 # Window settings
 WINDOW_HEIGHT = 750

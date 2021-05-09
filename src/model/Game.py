@@ -28,7 +28,7 @@ class Game:
         # todo: find out all pairs of colliding objects, and check for all collisions what needs to happen
         #   for most collisions, just remove both, but house can be hit by attacks, but not by enemies.
         #   balloon cannot be hit by any hostile obstacle!
-        self.spawn_objects()
+        # self.spawn_objects()
         self.finished = False
         self.spawning_counter = 0
         self.battery = Battery(self)
@@ -78,8 +78,11 @@ class Game:
             colliding_pairs.append((f_o, h_o))
         for (friendly, enemy) in colliding_pairs:
             if isinstance(friendly, Balloon):
-                self.score = time.time() - self.start_time
-                self.finished = True
+                if CAN_DIE:
+                    self.score = time.time() - self.start_time
+                    self.finished = True
+                else:
+                    print("af")
             elif isinstance(friendly, Soundwave):
                 self.remove_object(friendly)
                 del friendly
