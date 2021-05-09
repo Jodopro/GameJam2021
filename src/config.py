@@ -33,7 +33,7 @@ WAVE_SPEED = 500
 WAVE_WIDTH_EXPANSION = 50
 
 # Images
-BACKGROUND_IMG = pygame.image.load("view/ugly_background2.png")
+BACKGROUND_IMG = pygame.image.load("view/background_sky.png")
 HOUSE_IMG = pygame.image.load("view/house.png")
 if random.random() < 0.1: HOUSE_IMG = pygame.image.load("view/police_box.png")
 BALLOON_IMG = pygame.image.load("view/balloon.png")
@@ -43,7 +43,7 @@ CONSTANT_BIRD_IMG = pygame.image.load("view/spaceship_red.png")
 CONSTANT_BIRD_FLIP_IMG = pygame.transform.flip(BIRD_IMG, True, False)
 AIMED_BIRD_IMG = pygame.image.load("view/spaceship_purple.png")
 AIMED_BIRD_FLIP_IMG = pygame.transform.flip(BIRD_IMG, True, False)
-WAVE_ENEMY_PNG = pygame.image.load("view/soundwave_purple.png")
+WAVE_ENEMY_PNG = pygame.image.load("view/soundwave_black.png")
 WAVE_RAINBOW_PNG = pygame.image.load("view/soundwave_green.png")
 BATTERY_EMPTY = pygame.image.load("view/battery_empty.png")
 BATTERY_10 = pygame.image.load("view/battery_10.png")
