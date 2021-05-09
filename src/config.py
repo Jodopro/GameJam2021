@@ -3,7 +3,7 @@ import pygame, numpy, random
 # Debug settings
 DRAW_HITBOX = False
 PRINT_TIME = False
-CAN_DIE = True
+CAN_DIE = False
 
 # Window settings
 WINDOW_HEIGHT = 750
@@ -38,7 +38,7 @@ BACKGROUND_IMG = pygame.image.load("view/background_sky.png")
 HOUSE_IMG = pygame.image.load("view/house_2.png")
 POLICE_BOX = pygame.image.load("view/police_box.png")
 POLICE_BOX_SHINY = pygame.image.load("view/police_box_shiny.png")
-HOUSE_IMG = POLICE_BOX_SHINY
+# HOUSE_IMG = POLICE_BOX_SHINY
 if random.random() < 0.1:
     HOUSE_IMG = POLICE_BOX
     if random.random() < 0.2: HOUSE_IMG = POLICE_BOX_SHINY

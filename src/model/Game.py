@@ -5,6 +5,7 @@ from model.obstacle.Ship import Ship
 from model.obstacle.Obstacle import Obstacle
 from model.obstacle.enemy.Enemy import Enemy
 from model.obstacle.enemy.Plane import Plane
+from model.obstacle.Cloud import Cloud
 from model.obstacle.attack.Soundwave import Soundwave
 from model.BatteryDisplayer import BatteryDisplayer
 from model.ScoreDisplayer import ScoreDisplayer
@@ -44,15 +45,17 @@ class Game:
         if self.spawning_counter >= self.enemy_spawning_delay:
             self.enemy_spawning_delay *= BIRD_SPAWNING_DELAY_DECREASE
             self.difficulty += DIFFICULTY_INCREASE
-            modifier = 100 + 10*self.difficulty + self.difficulty**2
+            modifier = 100 + 10*self.difficulty + self.difficulty**2 + self.difficulty**2//10
             r = random.random()*modifier
             if r < 100:
-                bird = ConstantBird(self)
+                o = ConstantBird(self)
             elif r < 100 + 10*self.difficulty:
-                bird = RandomBird(self)
+                o = RandomBird(self)
+            elif r < 100 + 10*self.difficulty + self.difficulty**2:
+                o = AimedBird(self)
             else:
-                bird = AimedBird(self)
-            self.add_object(bird)
+                o = Cloud(game=self)
+            self.add_object(o)
             self.spawning_counter = 0
 
     def update(self, dt):
