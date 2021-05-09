@@ -1,6 +1,7 @@
+if you don't have virtualenv installed, you can install it by running:\
+`pip install virtualenv`\
 set up virtual environment:\
-`python3.8 -m virtualenv venv` (if python3.8 is not installed, most other versions of python >= 3.6 should work)
-
+`python -m virtualenv venv` (make sure you are using python >= 3.6)\
 
 activate virtual environment:\
 `. ./venv/bin/activate` on ubuntu \
@@ -14,7 +15,6 @@ then, to run, move into the src directory:\
 `cd src`\
 and then run main.py:\
 `python main.py`
-
 
 
 
