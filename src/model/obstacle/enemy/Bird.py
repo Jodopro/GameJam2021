@@ -3,6 +3,7 @@ from model.obstacle.attack.Soundwave import Soundwave
 import random, pygame
 from view import PLAYER_OFFSET
 import numpy as np
+import pygame
 
 
 shooting_delay = 0.1
@@ -24,9 +25,11 @@ class Bird(Enemy):
         self.aim_offset = random.randrange(-200, 200)
         self.pos = np.array([x, y])
         self.shooting_counter = 0
+        self.width = 100
+        self.height = 50
 
     def draw(self):
-        self.game.view.draw_image(self.pos[0], self.pos[1], space_bird, 35, 25, 1)
+        self.game.view.draw_image(self.pos[0], self.pos[1], space_bird, self.width, self.height)
         self.game.view.draw_hitbox(self.get_hitbox())
         # self.game.view.draw_circle(self.pos[0], self.pos[1], (0, 0, 255), 15)
 

@@ -3,27 +3,31 @@ import numpy as np
 
 from model.obstacle.attack.Attack import Attack
 
-wave_speed = 500
-width_expansion = 50
-wave = pygame.image.load("view/soundwave.png")
+WAVE_SPEED = 500
+WIDTH_EXPANSION = 50
+WAVE_ENEMY_PNG = pygame.image.load("view/rainbow_wave.png")
+WAVE_RAINBOW_PNG = pygame.image.load("view/enemy_wave.png")
 
 class Soundwave(Attack):
-    def __init__(self, game, origin, speed, direction):
+    def __init__(self, game, origin, speed, direction, is_enemy=False):
         super().__init__(game)
         self.game = game
         self.pos = origin.copy()
         self.speed = speed.copy()
         self.direction = direction/np.linalg.norm(direction)
-        self.speed += self.direction*wave_speed
+        self.speed += self.direction*WAVE_SPEED
         self.width = 10
         self.height = 10
         self.color = (0, 255, 0)
+        self.is_enemy = is_enemy
 
     def draw(self):
         self.game.view.draw_hitbox(self.get_hitbox())
-        self.game.view.draw_rect(self.pos[0], self.pos[1], self.color, self.width, self.height, self.direction)
-        # self.game.view.draw_wave(self.pos[0], self.pos[1], wave, self.width, 10, self.direction)
+        if self.is_enemy:
+            self.game.view.draw_image(self.pos[0], self.pos[1], WAVE_ENEMY_PNG, self.width, 10, self.direction)
+        else:
+            self.game.view.draw_image(self.pos[0], self.pos[1], WAVE_RAINBOW_PNG, self.width, 10, self.direction)
 
     def update(self, dt):
         super().update(dt)
-        self.width += dt * width_expansion
+        self.width += dt * WIDTH_EXPANSION

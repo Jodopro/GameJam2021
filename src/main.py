@@ -102,6 +102,7 @@ def run_game(current_pressed):
                 elif event.key == K_SPACE:
                     game.ship.shooting = False
         dt = currentTime - lastTime
+        print(dt)
         game.update(dt)
         game.draw()
         pygame.display.update()
