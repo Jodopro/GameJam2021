@@ -25,10 +25,16 @@ WAVE_WIDTH_EXPANSION = 50
 
 # Images
 BACKGROUND_IMG = pygame.image.load("view/ugly_background2.png")
-HOUSE_IMG = pygame.image.load("view/house.png")
+HOUSE_IMG = pygame.image.load("view/house.png")  # replace with "view/police_box.png" for a cool B-skin B)
 BALLOON_IMG = pygame.image.load("view/balloon.png")
 BIRD_IMG = pygame.image.load("view/spaceship.png")
 BIRD_FLIP_IMG = pygame.transform.flip(BIRD_IMG, True, False)
 WAVE_ENEMY_PNG = pygame.image.load("view/soundwave_purple.png")
 WAVE_RAINBOW_PNG = pygame.image.load("view/soundwave_green.png")
+BATTERY_EMPTY = pygame.image.load("view/battery_empty")
+BATTERY_25 = pygame.image.load("view/battery_25y")
+BATTERY_50 = pygame.image.load("view/battery_50")
+BATTERY_75 = pygame.image.load("view/battery_75")
+BATTERY_FULL= pygame.image.load("view/battery_fully")
+BATTERY_ARRAY = [BATTERY_EMPTY, BATTERY_25, BATTERY_50, BATTERY_75, BATTERY_FULL]
 
