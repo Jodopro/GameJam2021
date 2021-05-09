@@ -4,6 +4,8 @@ from model.obstacle.Obstacle import Obstacle
 import random
 
 from model.obstacle.attack.Bliksem import Bliksem
+from config import *
+import numpy as np
 
 bliksem_delay = 2.0
 
@@ -15,8 +17,12 @@ class Cloud(Obstacle):
 
     type = Type(2) # default type
 
-    def __init__(self, *args, delay=2.0, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, *args, game, delay=2.0, **kwargs):
+        super().__init__(*args, game=game, **kwargs)
+        temp_y = int((1 - BIRD_SPAWN_PLACE) * WINDOW_HEIGHT) + random.randrange(int(WINDOW_HEIGHT * BIRD_SPAWN_PLACE))
+        y = game.ship.pos[1] - PLAYER_OFFSET + temp_y
+        x = random.randrange(50, WINDOW_WIDTH-50)
+        self.pos = np.array([x, y])
         self.delay = delay
         self.time_elapsed = 0.0
 
