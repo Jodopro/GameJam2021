@@ -6,10 +6,13 @@ from model.obstacle.Obstacle import Obstacle
 from model.obstacle.enemy.Enemy import Enemy
 from model.obstacle.enemy.Plane import Plane
 from model.obstacle.attack.Soundwave import Soundwave
-from model.Battery import Battery
+from model.BatteryDisplayer import BatteryDisplayer
+from model.ScoreDisplayer import ScoreDisplayer
 from view import View
 
-from model.obstacle.enemy.Bird import Bird
+from model.obstacle.enemy.RandomBird import RandomBird
+from model.obstacle.enemy.AimedBird import AimedBird
+from model.obstacle.enemy.ConstantBird import ConstantBird
 
 
 class Game:
@@ -18,7 +21,7 @@ class Game:
     def __init__(self, window):
         self.start_time = time.time()
         self.score = 0
-        self.enemy_spawning_delay = BIRD_SPAWNING_DELAY_START
+        self.enemy_spawning_delay = BIRD_SPAWNING_DELAY
         self.view = View(self, window)
         self.ship = Ship(self)
         self.objects = []
@@ -30,15 +33,25 @@ class Game:
         #   for most collisions, just remove both, but house can be hit by attacks, but not by enemies.
         #   balloon cannot be hit by any hostile obstacle!
         # self.spawn_objects()
+        self.difficulty = 0
         self.finished = False
         self.spawning_counter = 0
-        self.battery = Battery(self)
+        self.battery = BatteryDisplayer(self)
+        self.score_displayer = ScoreDisplayer(self)
 
     def update_spawner(self, dt):
         self.spawning_counter += dt
         if self.spawning_counter >= self.enemy_spawning_delay:
-            self.enemy_spawning_delay *= BIRD_SPAWNING_DELAY_UPDATE_PERCENTAGE
-            bird = Bird(self)
+            self.enemy_spawning_delay *= BIRD_SPAWNING_DELAY_DECREASE
+            self.difficulty += DIFFICULTY_INCREASE
+            modifier = 100 + 10*self.difficulty + self.difficulty**2
+            r = random.random()*modifier
+            if r < 100:
+                bird = ConstantBird(self)
+            elif r < 100 + 10*self.difficulty:
+                bird = RandomBird(self)
+            else:
+                bird = AimedBird(self)
             self.add_object(bird)
             self.spawning_counter = 0
 
@@ -111,6 +124,7 @@ class Game:
         for o in self.objects:
             o.draw()
         self.battery.draw()
+        self.score_displayer.draw()
 
     def add_object(self, o):
         self.objects.append(o)
@@ -150,12 +164,6 @@ class Game:
         elif o.nature == Obstacle.Nature.Hostile:
             self.hostile_obstacles.remove(o)
 
-
-    def spawn_objects(self):
-        # spawn some objects for demo purposes,
-        plane = Plane(self)
-        plane.set_pos(self.ship.pos + [0, 500])
-        self.add_object(plane)
 
 
     def collision(self, o1, o2):

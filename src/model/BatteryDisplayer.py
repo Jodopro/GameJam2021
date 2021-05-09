@@ -1,7 +1,7 @@
 from config import *
 
 
-class Battery:
+class BatteryDisplayer:
     def __init__(self, game):
         self.game = game
 

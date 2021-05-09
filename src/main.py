@@ -1,10 +1,11 @@
+import pygame
+pygame.init()
 import sys
 import time
 from pygame.locals import *
 from model.Game import Game
 from config import *
 
-pygame.init()
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -15,16 +16,14 @@ CYAN = (0, 255, 255)
 PURPLE = (255, 0, 255)
 YELLOW = (255, 255, 0)
 
-basicFont = pygame.font.SysFont(None, 48)
-
 window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), 0, 32)
 
 
 def start_screen():
     window.fill((0, 0, 0))
-    line1 = basicFont.render("Bananas are Berries", False, (255, 255, 255))
+    line1 = FONT.render("Bananas are Berries", False, (255, 255, 255))
     window.blit(line1, (30, 10))
-    line2 = basicFont.render("Press any key to start", False, (255, 255, 255))
+    line2 = FONT.render("Press R key to start", False, (255, 255, 255))
     window.blit(line2, (30, 100))
     pygame.display.update()
     exit_start_screen = False
@@ -34,7 +33,8 @@ def start_screen():
                 pygame.quit()
                 sys.exit()
             elif event.type == KEYUP:
-                exit_start_screen = True
+                if event.key == K_r:
+                    exit_start_screen = True
     while True:
         current_pressed = pygame.key.get_pressed()
         run_game(current_pressed)
@@ -42,24 +42,21 @@ def start_screen():
 
 def end_screen(score):
     window.fill((0, 0, 0))
-    line1 = basicFont.render("Bananas are Berries", False, (255, 255, 255))
+    line1 = FONT.render("Bananas are Berries", False, (255, 255, 255))
     window.blit(line1, (30, 10))
-    line2 = basicFont.render("Score was: "+str(score), False, (255, 255, 255))
+    line2 = FONT.render("Score was: "+str(score), False, (255, 255, 255))
     window.blit(line2, (30, 110))
-    line3 = basicFont.render("Press any key to try again", False, (255, 255, 255))
+    line3 = FONT.render("Press R to try again", False, (255, 255, 255))
     window.blit(line3, (30, 210))
     pygame.display.update()
     exit_end_screen = False
-    new_pressed = []
     while not exit_end_screen:
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
-            elif event.type == KEYDOWN:
-                new_pressed.append(event.key)
             elif event.type == KEYUP:
-                if event.key in new_pressed:
+                if event.key == K_r:
                     exit_end_screen = True
 
 

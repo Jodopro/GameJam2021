@@ -82,3 +82,7 @@ class View:
                     pos[0] = self.transform_x(pos[0])
                     pos[1] = self.transform_y(pos[1])
                 pygame.draw.line(self.window, color, e[0], e[1])
+
+    def draw_text(self, x, y, text):
+        line1 = FONT.render(text, False, (255, 255, 255))
+        self.window.blit(line1, (self.transform_x(x), self.transform_y(y)))

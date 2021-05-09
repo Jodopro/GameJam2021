@@ -3,7 +3,7 @@ from model.obstacle.Obstacle import Obstacle
 
 
 class Explosion(Obstacle):
-    def __init__(self, *args, origin, duration=0.5, **kwargs):
+    def __init__(self, *args, origin, duration=0.2, **kwargs):
         super().__init__(*args, nature=Obstacle.Nature.Hostile, **kwargs)
         self.pos = origin.copy()
         self.time_elapsed = 0.0 # seconds
