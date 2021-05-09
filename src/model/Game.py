@@ -1,4 +1,4 @@
-import util
+import util, time
 from config import *
 from model.obstacle.Ship import Ship
 from model.obstacle.Obstacle import Obstacle
@@ -7,14 +7,17 @@ from view import View
 
 from model.obstacle.enemy.Bird import Bird
 
-game_height = 10000
-spawning_delay = 1
+# not in config because where going to not need it when the game is infinite
+game_height = 5000
 
 
 class Game:
     ship = None
 
     def __init__(self, window):
+        self.start_time = time.time()
+        self.score = 0
+        self.enemy_spawning_delay = BIRD_SPAWNING_DELAY_START
         self.view = View(self, window)
         self.ship = Ship(self)
         self.objects = []
@@ -24,7 +27,8 @@ class Game:
 
     def update_spawner(self, dt):
         self.spawning_counter += dt
-        if self.spawning_counter >= spawning_delay:
+        if self.spawning_counter >= self.enemy_spawning_delay:
+            self.enemy_spawning_delay *= BIRD_SPAWNING_DELAY_UPDATE_PERCENTAGE
             bird = Bird(self)
             self.add_object(bird)
             self.spawning_counter = 0
@@ -47,6 +51,7 @@ class Game:
             del o
 
         if self.ship.pos[1] > game_height:
+            self.score = time.time()-self.start_time
             self.finished = True
 
     def check_collisions(self):

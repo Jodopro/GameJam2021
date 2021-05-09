@@ -22,9 +22,9 @@ window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), 0, 32)
 def start_screen():
     window.fill((0, 0, 0))
     line1 = basicFont.render("Bananas are Berries", False, (255, 255, 255))
-    window.blit(line1, (330, 10))
+    window.blit(line1, (30, 10))
     line2 = basicFont.render("Press any key to start", False, (255, 255, 255))
-    window.blit(line2, (330, 100))
+    window.blit(line2, (30, 100))
     pygame.display.update()
     exit_start_screen = False
     while not exit_start_screen:
@@ -39,21 +39,27 @@ def start_screen():
         run_game(current_pressed)
 
 
-def end_screen():
+def end_screen(score):
     window.fill((0, 0, 0))
     line1 = basicFont.render("Bananas are Berries", False, (255, 255, 255))
-    window.blit(line1, (330, 10))
-    line2 = basicFont.render("Press any key to try again", False, (255, 255, 255))
-    window.blit(line2, (330, 100))
+    window.blit(line1, (30, 10))
+    line2 = basicFont.render("Score was: "+str(score), False, (255, 255, 255))
+    window.blit(line2, (30, 110))
+    line3 = basicFont.render("Press any key to try again", False, (255, 255, 255))
+    window.blit(line3, (30, 210))
     pygame.display.update()
     exit_end_screen = False
+    new_pressed = []
     while not exit_end_screen:
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
+            elif event.type == KEYDOWN:
+                new_pressed.append(event.key)
             elif event.type == KEYUP:
-                exit_end_screen = True
+                if event.key in new_pressed:
+                    exit_end_screen = True
 
 
 def run_game(current_pressed):
@@ -109,7 +115,7 @@ def run_game(current_pressed):
         lastTime = currentTime
         if game.finished:
             break
-    end_screen()
+    end_screen(game.score)
 
 
 
