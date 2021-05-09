@@ -38,14 +38,26 @@ BIRD_FLIP_IMG = pygame.transform.flip(BIRD_IMG, True, False)
 WAVE_ENEMY_PNG = pygame.image.load("view/soundwave_purple.png")
 WAVE_RAINBOW_PNG = pygame.image.load("view/soundwave_green.png")
 BATTERY_EMPTY = pygame.image.load("view/battery_empty.png")
-BATTERY_25 = pygame.image.load("view/battery_25.png")
+BATTERY_10 = pygame.image.load("view/battery_10.png")
+BATTERY_20 = pygame.image.load("view/battery_20.png")
+BATTERY_30 = pygame.image.load("view/battery_30.png")
+BATTERY_40 = pygame.image.load("view/battery_40.png")
 BATTERY_50 = pygame.image.load("view/battery_50.png")
-BATTERY_75 = pygame.image.load("view/battery_75.png")
+BATTERY_60 = pygame.image.load("view/battery_60.png")
+BATTERY_70 = pygame.image.load("view/battery_70.png")
+BATTERY_80 = pygame.image.load("view/battery_80.png")
+BATTERY_90 = pygame.image.load("view/battery_90.png")
 BATTERY_FULL = pygame.image.load("view/battery_full.png")
 BATTERY_ARRAY = [
     (0, BATTERY_EMPTY),
-    (25, BATTERY_25),
+    (10, BATTERY_10),
+    (20, BATTERY_20),
+    (30, BATTERY_30),
+    (40, BATTERY_40),
     (50, BATTERY_50),
-    (75, BATTERY_75),
+    (60, BATTERY_60),
+    (70, BATTERY_70),
+    (80, BATTERY_80),
+    (90, BATTERY_90),
     (100, BATTERY_FULL)]
 
