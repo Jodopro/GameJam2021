@@ -1,7 +1,7 @@
 if you don't have virtualenv installed, you can install it by running:\
 `pip install virtualenv`\
 set up virtual environment:\
-`python -m virtualenv venv` (make sure you are using python >= 3.6)\
+`python -m virtualenv venv` (make sure you are using python >= 3.6)
 
 activate virtual environment:\
 `. ./venv/bin/activate` on ubuntu \
