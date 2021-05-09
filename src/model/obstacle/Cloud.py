@@ -20,7 +20,7 @@ class Cloud(Obstacle):
     type = Type(2) # default type
 
     def __init__(self, *args, game, delay=0.5, **kwargs):
-        super().__init__(*args, game=game, **kwargs)
+        super().__init__(*args, game=game, width=2*46, height=2*30, **kwargs)
         temp_y = int((1 - BIRD_SPAWN_PLACE) * WINDOW_HEIGHT) + random.randrange(int(WINDOW_HEIGHT * BIRD_SPAWN_PLACE))
         y = game.ship.pos[1] - PLAYER_OFFSET + temp_y
         x = random.randrange(50, WINDOW_WIDTH-50)
@@ -37,6 +37,7 @@ class Cloud(Obstacle):
             self.game.view.draw_image(self.pos[0], self.pos[1], CLOUD_GREY, self.width, self.height)
         if self.type == Cloud.Type.Black:
             self.game.view.draw_image(self.pos[0], self.pos[1], CLOUD_BLACK, self.width, self.height)
+        self.game.view.draw_hitbox(self.get_hitbox(), self.color)
 
 
     def update(self, d_t):
